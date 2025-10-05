@@ -1,0 +1,36 @@
+.navbar {
+  display: flex;
+  position: sticky;
+  z-index: 10000;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #000000 20%, #1a1a1a);
+}
+
+.logo {
+  margin-left: 20px;
+  transition: 0.5s ease-in-out;
+}
+.logo:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgb(221, 201, 102));
+}
+
+.navbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  margin-right: 20px;
+  padding: 0;
+}
+.navbar-icons li {
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.navbar-icons li:hover {
+  color: gold;
+  transform: scale(1.2);
+}

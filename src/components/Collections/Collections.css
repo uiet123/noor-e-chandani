@@ -1,0 +1,33 @@
+.collections {
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  padding: 80px 20px;
+  color: #f5f5f5;
+  justify-content: center;
+  align-items: center;
+}
+
+.collections h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  background: linear-gradient(to right, gold, #fff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+}
+
+.collections-items{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 100px;
+    margin-top: 30px;
+}
+
+
+.collections-item h3{
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 22px;
+}
