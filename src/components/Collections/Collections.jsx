@@ -1,45 +1,38 @@
-import React from 'react'
-import "./Collections.css"
-import assests from '../../assets/assets'
+import React, { useEffect } from "react";
+import "./Collections.css";
+import { CollectionData } from "../../data/CollectionData";
+import {Link} from "react-router-dom"
+import axios from "axios";
+import { BASE_URL } from "../../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { setCollections } from "../../store/collectionSlice";
 const Collections = () => {
-    const collectionItems = [
-        {id: 1,
-            name:"Dating",
-            image: assests.dating_col
-        },
-        {id: 2,
-            name:"Festival",
-            image: assests.festival_col
-        },
-        {id: 3,
-            name:"Wellness",
-            image: assests.welness_col
-        },
-        {id: 4,
-            name:"Everyday Comforts",
-            image: assests.everyday_col
-        },
-        {id: 5,
-            name:"Gift Sets",
-            image: assests.giftset_col
-        }
-
-    ]
+  const dispatch = useDispatch();
+  const collections = useSelector(state => state.collection.collections) 
+  useEffect(() => {
+    async function getCollections() {
+      const res = await axios.get(`${BASE_URL}/collections`, {
+        withCredentials: true
+      })
+      dispatch(setCollections(res?.data?.data))
+    }
+    getCollections()
+  },[])
   return (
-    <div className='collections'>
-        <h2>Our Collections</h2>
-        <div className='collections-items'>
-            {collectionItems.map((item) => {
-                return (
-                    <div className='collections-item' key={item.id}>
-                        <img height={300} width={250} src={item.image} alt="" />
-                        <h3>{item.name}</h3>
-                    </div>
-                )
-            })}
-        </div>
+    <div className="collections">
+      <h2>Our Collections</h2>
+      <div className="collections-items">
+        {collections.map((item) => {
+          return (
+            <Link to={`/collections/${item.slug}`} key={item._id} className="card">
+              <img height={300} width={250} src={`${BASE_URL}${item.image}`} alt="img" />
+              <h3>{item.name}</h3>
+            </Link>
+          );
+        })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Collections
+export default Collections;

@@ -18,16 +18,22 @@
   letter-spacing: 2px;
 }
 
+
 .collections-items{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 100px;
     margin-top: 30px;
 }
+.card{
+  text-decoration: none;
+}
 
-
-.collections-item h3{
+.card h3{
     text-align: center;
     padding: 10px 10px;
     font-size: 22px;
+    color: wheat;
+     
 }
+
