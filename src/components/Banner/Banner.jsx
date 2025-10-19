@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import assests from "../../assets/assets";
 import { FaRegCircle } from "react-icons/fa6";
 import "./Banner.css";
 const Banner = () => {
     const [current, setCurrent] = useState(0)
     const [direction, setDirection] = useState("right");
   const videos = [
-    assests.v1,
-    assests.v2,
-    assests.v3,
-    assests.v4,
-    assests.v5,
-    assests.v6,
+     "/videos/v1.mp4",
+  "/videos/v2.mp4",
+  "/videos/v3.mp4",
+  "/videos/v4.mp4",
+  "/videos/v5.mp4",
+  "/videos/v6.mp4",
   ];
   useEffect(() => {
     
