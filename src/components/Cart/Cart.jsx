@@ -5,10 +5,12 @@ import { RemoveFromCart, ClearCart } from "../../store/cartSlice";
 import { BASE_URL } from "../../utils/constants";
 import { setAllProducts } from "../../store/productSlice";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "./Cart.css";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const user = useSelector(state => state.user.user)
   const cartItems = useSelector((state) => state.cart.items); // {101:2, 202:1...}
   const allProduct = useSelector(state => state.product.allProducts)
 
@@ -64,7 +66,7 @@ const Cart = () => {
         <button className="clear-btn" onClick={() => dispatch(ClearCart())}>
           Clear Cart
         </button>
-        <button className="checkout-btn">Proceed to Checkout</button>
+        <Link to={user ? "/checkout": "/login"}><button className="checkout-btn">Proceed to Checkout</button></Link>
       </div>
     </div>
   );

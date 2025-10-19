@@ -61,7 +61,7 @@ const CollectionDetail = () => {
         ))}
       </div>
 
-      <Link to="/collections" className="back-link">← Back to Collections</Link>
+      <Link to="/" className="back-link">← Back to Collections</Link>
     </div>
   );
 };

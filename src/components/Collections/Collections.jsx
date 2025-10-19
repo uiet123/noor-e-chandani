@@ -10,13 +10,20 @@ const Collections = () => {
   const dispatch = useDispatch();
   const collections = useSelector(state => state.collection.collections) 
   useEffect(() => {
-    async function getCollections() {
+    try{
+        async function getCollections() {
       const res = await axios.get(`${BASE_URL}/collections`, {
         withCredentials: true
       })
       dispatch(setCollections(res?.data?.data))
     }
     getCollections()
+    }
+    catch(err){
+      console.log("Error while fetching collections", err)
+    }
+  
+    
   },[])
   return (
     <div className="collections">
