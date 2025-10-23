@@ -1,0 +1,44 @@
+.returns-container {
+  background-color: #111;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 20px;
+  color: #f0e6b2;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.returns-content {
+  max-width: 800px;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.returns-title {
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  color: #ffd700;
+  letter-spacing: 1px;
+}
+
+.returns-text {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #dcdcdc;
+}
+
+.returns-text span {
+  color: #ffd700;
+  font-weight: 600;
+}
+
+.returns-text a {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.returns-text a:hover {
+  text-decoration: underline;
+}

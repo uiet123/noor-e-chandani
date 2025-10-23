@@ -3,15 +3,19 @@ import { createSlice } from "@reduxjs/toolkit";
 const collectionSlice = createSlice({
     name: "collection",
     initialState: {
-        collections: []
+        collections: [],
+        loading: true
     },
     reducers: {
         setCollections: (state, action) => {
             state.collections = action.payload;
+        },
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         }
     }
 
 })
 
-export const { setCollections } = collectionSlice.actions;
+export const { setCollections, setLoading } = collectionSlice.actions;
 export default collectionSlice.reducer;

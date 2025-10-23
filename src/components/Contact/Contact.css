@@ -1,0 +1,137 @@
+/* Contact.css */
+.contact-page {
+  min-height: 100vh;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #e6e6e6;
+}
+
+/* card */
+.contact-card {
+  width: 100%;
+  max-width: 980px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* header */
+.contact-header h1 {
+  color: #ffd700; /* gold */
+  font-size: 2rem;
+  margin: 0 0 8px 0;
+}
+
+.contact-header .lead {
+  color: #d7d7d7;
+  margin: 0 0 22px 0;
+  line-height: 1.6;
+}
+
+/* form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.field-row {
+  display: flex;
+  gap: 14px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: #ddd;
+}
+
+input, textarea {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #f0f0f0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.95rem;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(255,255,255,0.35);
+}
+
+input:focus, textarea:focus {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  border-color: rgba(255,215,0,0.45);
+}
+
+/* full width label */
+.full-width {
+  width: 100%;
+}
+
+/* actions */
+.actions {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg,#ffd700,#f0c200);
+  color: #111;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(255,215,0,0.08);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+/* status messages */
+.status {
+  font-size: 0.95rem;
+  color: #bdbdbd;
+}
+
+.status.success { color: #9ae6b4; }
+.status.error { color: #ff9b9b; }
+.status.info { color: #f7e59a; }
+
+.note {
+  margin-top: 12px;
+  font-size: 0.92rem;
+  color: #bfbfbf;
+  line-height: 1.5;
+}
+
+/* responsiveness */
+@media (max-width: 800px) {
+  .field-row {
+    flex-direction: column;
+  }
+
+  .contact-card {
+    padding: 22px;
+  }
+
+  .contact-header h1 {
+    font-size: 1.6rem;
+  }
+}

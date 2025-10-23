@@ -1,0 +1,146 @@
+/* Shipping.css - scoped, no :root variables, responsive */
+
+/* page wrapper */
+.shipping-page {
+  background: #111;
+  color: #e6eef0;
+  min-height: 100vh;
+  padding: 40px 16px 80px;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* hero */
+.shipping-hero {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.shipping-hero .hero-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 12px;
+}
+.shipping-hero h1 {
+  color: #ffd54a;
+  margin: 0 0 8px 0;
+  font-size: 30px;
+}
+.shipping-hero p {
+  color: #9aa6ad;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* main content area */
+.shipping-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6px;
+}
+
+/* sections */
+.shipping-section {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.shipping-section h2 {
+  margin: 0 0 10px 0;
+  color: #f3f4f6;
+  font-size: 18px;
+}
+
+/* grid of shipping cards */
+.shipping-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.shipping-card {
+  background: rgba(255,255,255,0.01);
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.025);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.55);
+}
+.shipping-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  color: #ffd54a;
+}
+.shipping-card p { margin: 6px 0; color: #bfc9cc; font-size: 14px; }
+
+/* bullet and numbered lists */
+.bullet-list, .numbered-list {
+  margin: 8px 0 0 0;
+  padding-left: 18px;
+  color: #bfc9cc;
+  font-size: 14px;
+}
+.numbered-list { list-style: decimal; }
+
+/* tracking box */
+.tracking-box {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  color: #cfe6e9;
+  font-size: 14px;
+}
+
+/* quick faq mini */
+.faq-mini .mini-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+.faq-mini h4 { margin: 0 0 6px 0; color: #fff; font-size: 14px; }
+.faq-mini p { margin: 0; color: #bfc9cc; font-size: 14px; }
+
+/* CTA footer */
+.shipping-cta {
+  margin-top: 22px;
+  text-align: center;
+}
+.shipping-cta .cta-inner {
+  display: inline-block;
+  background: rgba(255,255,255,0.02);
+  padding: 18px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.shipping-cta h3 { margin: 0 0 8px 0; color: #ffd54a; font-size: 18px; }
+.shipping-cta p { margin: 0 0 12px 0; color: #9aa6ad; }
+.btn-primary {
+  display: inline-block;
+  background: #ffd54a;
+  color: #07121a;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* responsive adjustments */
+@media (max-width: 992px) {
+  .shipping-grid { grid-template-columns: 1fr 1fr; }
+  .faq-mini .mini-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .shipping-page { padding: 24px 12px 60px; }
+  .shipping-hero h1 { font-size: 24px; }
+  .shipping-grid { grid-template-columns: 1fr; }
+  .shipping-section { padding: 14px; }
+  .shipping-card h3 { font-size: 15px; }
+  .shipping-card p { font-size: 14px; }
+  .shipping-cta .cta-inner { width: 80%; text-align: center; }
+}

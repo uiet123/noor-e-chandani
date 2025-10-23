@@ -5,10 +5,11 @@ import {Link} from "react-router-dom"
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { setCollections } from "../../store/collectionSlice";
+import { setCollections, setLoading } from "../../store/collectionSlice";
 const Collections = () => {
   const dispatch = useDispatch();
   const collections = useSelector(state => state.collection.collections) 
+  const loading = useSelector(state => state.collection.loading)
   useEffect(() => {
     try{
         async function getCollections() {
@@ -16,6 +17,7 @@ const Collections = () => {
         withCredentials: true
       })
       dispatch(setCollections(res?.data?.data))
+      dispatch(setLoading(false))
     }
     getCollections()
     }
@@ -29,7 +31,7 @@ const Collections = () => {
     <div className="collections">
       <h2>Our Collections</h2>
       <div className="collections-items">
-        {collections.map((item) => {
+        {loading? <div>Loading.....</div> : collections.map((item) => {
           return (
             <Link to={`/collections/${item.slug}`} key={item._id} className="card">
               <img height={300} width={250} src={`${BASE_URL}${item.image}`} alt="img" />
