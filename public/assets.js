@@ -1,4 +1,3 @@
-import logo from "./logo.png"
 import vanilla from "./dating/vanilla_musk.png"
 import dating_col from "./collection_cover/dating_col.jpg"
 import everyday_col from "./collection_cover/everyday_col.jpg"
@@ -30,7 +29,6 @@ import tealight_candles_unscented from "./everday_essentials/tealight_candles_un
 import votive_candles from "./everday_essentials/votive_candles.png"
 import wax_melts from "./everday_essentials/wax_melts.png"
 const assests = {
-    logo,
     vanilla,
     dating_col,
     everyday_col,

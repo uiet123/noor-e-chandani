@@ -1,4 +1,3 @@
-import assests from "../../assets/assets";
 import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { CgProfile } from "react-icons/cg";
 import "./Navbar.css";
@@ -35,7 +34,7 @@ const Navbar = () => {
           className="logo"
           height={80}
           width={140}
-          src={assests.logo}
+          src="/logo.png"
           alt="logo"
         />
         </Link>
