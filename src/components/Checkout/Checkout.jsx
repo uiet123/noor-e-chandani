@@ -3,8 +3,12 @@ import "./Checkout.css";
 import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../../utils/constants";
 import { ClearCart } from "../../store/cartSlice";
+import axios from "axios";
 
 const Checkout = () => {
+
+
+
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const allProducts = useSelector((state) => state.product.allProducts);
@@ -22,6 +26,62 @@ const Checkout = () => {
   const [errors, setErrors] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartProducts, setCartProducts] = useState([]);
+
+
+  const handleClick = async () => {
+    try{
+        const items = cartProducts.map((p) => ({
+      productId: p._id,
+      name: p.name,
+      price: p.price,
+      quantity: cartItems[p._id],
+      image: p.image,
+    }));
+
+       const payload = {
+      items,
+      shippingAddress: address,
+      subtotal: totalPrice,
+      shippingCharge: 50,
+      totalAmount: totalPrice + 50,
+    };
+
+      const res = await axios.post(BASE_URL + "/payment/create" , 
+      payload
+    , {withCredentials: true})
+
+    const {amount, keyId, currency, notes, orderId} = res.data
+      var options = {
+    key: keyId, 
+    amount: amount, 
+    currency: currency,
+    name: "Noor-e-Chandani",
+    description: "Thanks for shopping with us",
+    order_id: orderId, 
+    prefill: { 
+        name: notes.firstName + " " + notes.lastName,
+        email: notes.emailId,
+    },
+    theme: {
+        color: "gold"
+    }
+};
+    
+
+    const rzp = new window.Razorpay(options)
+  rzp.open();
+
+     console.log("Payment create response:", res.data);
+  
+    }
+    catch(err){
+      console.log(err);
+      alert("❌ Error calling /payment/create API");
+    }
+    
+  }
+
+
 
   // 🧮 Calculate Total and Filter Products
   useEffect(() => {
@@ -172,7 +232,7 @@ const Checkout = () => {
             </p>
           </div>
 
-          <button className="pay-btn" onClick={handlePayment}>
+          <button onClick={() => handleClick()} className="pay-btn">
             Pay & Proceed
           </button>
         </div>
