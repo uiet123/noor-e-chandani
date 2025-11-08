@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+
+.collections {
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  padding: 100px 40px; /* 🌟 Added breathing space around */
+  color: #f5f5f5;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Title */
+.collections h2 {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+ color: #E5C55B;
+ font-family: "Cormorant Garamond", serif;
+  letter-spacing: 2px;
+}
+
+/* Grid layout */
+.collections-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 100px; /* reduced slightly for compact layout */
+  margin-top: 20px;
+  width: 100%;
+  max-width: 1100px;
+  padding: 0 20px; /* inner spacing */
+}
+
+/* Card */
+.card {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  background-color: #111;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 12px; /* 🌟 added inner padding for neat spacing */
+  width: 100%;
+  max-width: 300px; /* 🌟 smaller card width */
+  margin: 0 auto; /* center cards in grid cells */
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
+}
+
+/* Image */
+.card img {
+  width: 100%;
+  height: 220px; /* 🌟 smaller height */
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.4s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* Title inside card */
+.card h3 {
+  text-align: center;
+  padding: 10px 5px 5px;
+  font-size: 20px; /* slightly smaller font */
+  color: wheat;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+/* ----------- Responsive Styles ----------- */
+
+/* Tablets (<=1024px) */
+@media (max-width: 1024px) {
+  .collections {
+    padding: 80px 80px;
+  }
+
+  .collections-items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .collections h2 {
+    font-size: 2.2rem;
+  }
+  .card{
+    margin-top: 20px
+  }
+
+  .card img {
+    height: 200px;
+  }
+}
+
+/* Mobiles (<=768px) */
+@media (max-width: 768px) {
+  .collections {
+    padding: 60px 60px;
+  }
+
+  .collections-items {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .collections h2 {
+    font-size: 1.9rem;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    max-width: 280px;
+    margin-top: 20px;
+  }
+
+  .card img {
+    height: 180px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+  }
+}

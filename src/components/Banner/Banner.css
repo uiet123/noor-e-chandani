@@ -1,0 +1,222 @@
+.video-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #000; /* fallback background */
+}
+
+/* 🎥 Video Styling */
+.video-container video {
+  width: 100%;
+  height: 495px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  transition: transform 0.5s ease-in-out;
+}
+
+.video-wrapper.right video {
+  animation: slideInRight 0.8s ease;
+}
+
+.video-wrapper.left video {
+  animation: slideInLeft 0.8s ease;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+.video-container video:hover {
+  transform: scale(1.01);
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: gold;
+  font-size: clamp(60px, 5vw, 50px);
+  font-weight: bold;
+  padding: 20px 18px;
+  border-radius: 10%;
+  z-index: 2;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.arrow.left {
+  left: 16px;
+}
+
+.arrow.right {
+  right: 16px;
+}
+
+.arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.15);
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+}
+
+.circles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 20%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.circle {
+  font-size: 14px;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.circle:hover {
+  transform: scale(1.3);
+  color: gold;
+}
+
+.active {
+  color: gold;
+  font-size: 15px;
+  transform: scale(1.4);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+.hero-text {
+  position: absolute;
+  top: 75%;
+  left: 75%;
+  transform: translate(-30%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 3;
+}
+
+.brand-name {
+  font-size: 2.8rem;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 800;
+  background: linear-gradient(to right, gold, #fff);
+  background-clip: text;              
+  -webkit-background-clip: text;      
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+
+.tagline {
+  font-size: 1rem;
+  font-style: italic;
+  margin-top: 12px;
+  color: #f5f5f5;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+
+/* 📱 Responsive Tweaks */
+@media (max-width: 1024px) {
+  .video-container video {
+    height: 55vh;
+  }
+  .hero-text{
+   top: 75%;
+  left: 72%;
+  transform: translate(-40%, -50%);
+  }
+  .brand-name{
+     font-size: 1.8rem;
+  font-weight: 800;
+  }
+  .tagline{
+font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .video-container video {
+    height: 45vh;
+  }
+  .arrow {
+    font-size: 28px;
+    padding: 8px 12px;
+  }
+  .arrow.left {
+    left: 8px;
+  }
+  .arrow.right {
+    right: 8px;
+  }
+   .hero-text{
+   top: 70%;
+  left: 65%;
+  transform: translate(-30%, -50%);
+  }
+  .brand-name{
+     font-size: 1.4rem;
+  font-weight: 800;
+  }
+  .tagline{
+font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-container video {
+    height: 40vh;
+  }
+  .arrow {
+    font-size: 24px;
+    padding: 6px 10px;
+  }
+  .circle {
+    font-size: 12px;
+  }
+     .hero-text{
+   top: 70%;
+  left: 60%;
+  transform: translate(-30%, -50%);
+  }
+  .brand-name{
+     font-size: 1.2rem;
+  font-weight: 800;
+  }
+  .tagline{
+font-size: 0.6rem;
+  }
+}
+
+
+@media (max-width:410px) {
+         .hero-text{
+   top: 70%;
+  left: 55%;
+ transform: translate(-10%, -50%);
+  }
+  .brand-name{
+     font-size: 0.9rem;
+  font-weight: 800;
+  }
+  .tagline{
+font-size: 0.5rem;
+  }
+}
+

@@ -1,0 +1,94 @@
+.navbar {
+  display: flex;
+  position: sticky;
+  z-index: 10000;
+  top: 0;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #000000 20%, #1a1a1a);
+}
+
+.logo {
+  margin-left: 20px;
+  transition: 0.5s ease-in-out;
+}
+.logo:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgb(221, 201, 102));
+}
+
+.navbar-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  margin-right: 20px;
+  padding: 0;
+}
+.navbar-icons li {
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.navbar-icons li:hover {
+  color: gold;
+  transform: scale(1.2);
+}
+
+.toggle-items {
+  position: absolute;
+  top: 90px;
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #1a1a1a;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 15px 20px;
+  min-width: 130px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  animation: slideDown 0.3s ease-in-out;
+  transform-origin: top right;
+  z-index: 1000;
+}
+
+/* Smooth fade + drop animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.toggle-items p {
+  color: #f2f2f2;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+}
+
+/* Hover effect: golden glow */
+.toggle-items p:hover {
+  background: linear-gradient(90deg, #facc15 0%, #eab308 100%);
+  color: #1a1a1a;
+  transform: translateX(4px);
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.5);
+}
+
+.toggle-items a {
+  text-decoration: none;
+}
+
+
