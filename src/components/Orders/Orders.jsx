@@ -76,9 +76,9 @@ const Orders = () => {
               <strong>Status:</strong>{" "}
               <span
                 className={`${
-                  order.orderStatus === "pending"
-                    ? "pending"
-                    : "delivered"
+                  order.orderStatus === "Pending"
+                    ? "Pending"
+                    : "Delivered"
                 }`}
               >
                 {order.orderStatus}

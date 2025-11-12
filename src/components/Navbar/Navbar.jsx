@@ -1,12 +1,10 @@
-import { PiShoppingCartSimpleThin } from "react-icons/pi";
-import { CgProfile } from "react-icons/cg";
+import { PiShoppingCartSimple } from "react-icons/pi";
+import { RxCross1, RxHamburgerMenu } from "react-icons/rx";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { BASE_URL } from "../../utils/constants";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { removeUser } from "../../store/userSlice";
 import axios from "axios";
 
@@ -14,54 +12,81 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user.user)
+  const user = useSelector((state) => state.user.user);
+  const cartItems = useSelector((state) => state.cart.items)
+  const cartCount = Object.values(cartItems).reduce((total, qty) => total + qty, 0);
+  const userFirstName =
+    user?.firstName?.trim().split(/\s+/)[0] ||
+    user?.name?.trim().split(/\s+/)[0] ||
+    "";
+
   const handleClickLogout = async () => {
-    try{
-      await axios.post(`${BASE_URL}/logout`, {}, {
-        withCredentials: true
-      })
-      dispatch(removeUser())
-      navigate("/")
-    }catch(err){
-      console.error(err.message)
+    try {
+      await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
+      dispatch(removeUser());
+      setToggle(false);
+      navigate("/");
+    } catch (err) {
+      console.error(err.message);
     }
-  }
+  };
+
   return (
     <div className="navbar">
       <div className="logo-wrapper">
         <Link to="/">
-        <img
-          className="logo"
-          height={80}
-          width={140}
-          src="/logo.png"
-          alt="logo"
-        />
+          <img className="logo" src="/logo.png" alt="logo" />
         </Link>
       </div>
-      {user && <p style={{color: "white"}}>Hello, {user.firstName}</p>}
-
+     
+      {user && <p className="username">Hi, {userFirstName}</p>}
+      
       <ul className="navbar-icons">
         <Link to="/cart"> <li className="cart">
-          <PiShoppingCartSimpleThin size={40} />
+          <PiShoppingCartSimple />
         </li></Link>
-        
-          
-            <CgProfile style={{color:"white"}} size={40} onClick={() => setToggle(prev => !prev)}> </CgProfile>
-            {toggle && (
-              <div className="toggle-items">
-            <Link to="/login"><p>Login</p></Link>
-            <Link to="/orders"><p>Orders</p></Link>
-            <Link onClick={handleClickLogout}><p>Logout</p></Link>
-            </div>
-            )}
-            
-         
-     
+     { cartCount > 0 && <p className="cart-number">{cartCount}</p>}
+
+        {/* Burger Button – icons ko mount/unmount mat karo */}
+        <li>
+          <button
+            className={`burger-btn ${toggle ? "open" : ""}`}
+            onClick={() => setToggle((p) => !p)}
+            aria-expanded={toggle}
+            aria-controls="nav-menu"
+            aria-label="Toggle menu"
+          >
+            <span className="icon hamburger">
+              <RxHamburgerMenu  />
+            </span>
+            <span className="icon cross">
+              <RxCross1  />
+            </span>
+          </button>
+        </li>
       </ul>
-      
-       
-    </div>
+
+      {/* Dropdown – hamesha render, class se open/close */}
+      <div id="nav-menu" className={`toggle-items ${toggle ? "open" : ""}`}>
+        {!user && (
+          <Link to="/login">
+            <p onClick={() => setToggle(false)}>Sign In</p>
+          </Link>
+        )}
+        <Link to="/orders">
+          <p onClick={() => setToggle(false)}>Orders</p>
+        </Link>
+        <Link to="/contact">
+          <p onClick={() => setToggle(false)}>Contact Us</p>
+        </Link>
+        {user && (
+          <button className="menu-btn" onClick={handleClickLogout}>
+            Logout
+          </button>
+        )}
+      </div>
+      </div>
+    
   );
 };
 

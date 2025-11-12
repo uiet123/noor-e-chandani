@@ -22,6 +22,7 @@ import ThankYou from "./components/ThankYou/ThankYou";
 import Orders from "./components/Orders/Orders";
 import { BASE_URL } from "./utils/constants";
 import { addUser } from "./store/userSlice";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 const App = () => {
   const dispatch = useDispatch();
 
@@ -43,8 +44,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Body />}>
-          <Route index element={<Hero />} />
+        <Route  element={<Body />}>
+          <Route path="/" element={<Hero />} />
           <Route path="collections/:slug" element={<CollectionDetails />} />
           <Route path="/collections" element={<Collections />} />
           <Route path="/about" element={<About />} />
@@ -56,10 +57,12 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          <Route element={<ProtectedRoute />}>
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/orders" element={<Orders />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/checkout" element={<Checkout />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

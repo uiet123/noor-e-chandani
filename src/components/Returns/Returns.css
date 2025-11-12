@@ -18,7 +18,7 @@
 .returns-title {
   font-size: 2.2rem;
   margin-bottom: 25px;
-  color: #ffd700;
+  color: #eec84d;
   letter-spacing: 1px;
 }
 
@@ -29,12 +29,12 @@
 }
 
 .returns-text span {
-  color: #ffd700;
+  color: #eec84d;
   font-weight: 600;
 }
 
 .returns-text a {
-  color: #ffd700;
+  color: #eec84d;
   text-decoration: none;
   font-weight: 500;
 }

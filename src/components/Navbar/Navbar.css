@@ -1,73 +1,147 @@
+/* ================== NAV BAR BASE ================== */
 .navbar {
   display: flex;
   position: sticky;
-  z-index: 10000;
+  flex-direction: row;
   top: 0;
+  z-index: 10000;
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(to right, #000000 20%, #1a1a1a);
 }
+.cart-number{
+  position: absolute;
+  top: 3px;
+  left: 22px;
+  background-color: #eec84d;
+  border-radius: 50%;
+  padding: 1px 10px;
+  color: #111;
+
+}
+ .icon{
+    font-size: 40px;
+    color: #d1d5db;
+  }
+  .cart{
+    font-size: 40px;
+  }
+
+.username {
+  color: #d1d5db;
+  padding: 2px 15px;
+  font-size: 1.2rem;
+}
+
+
 
 .logo {
   margin-left: 20px;
   transition: 0.5s ease-in-out;
+  height: 80px;
+  width: 140px;
 }
 .logo:hover {
   transform: scale(1.1);
   filter: drop-shadow(0 0 8px rgb(221, 201, 102));
 }
 
+/* Right side icons line */
 .navbar-icons {
   display: flex;
   align-items: center;
+  position: relative;
   gap: 20px;
   list-style: none;
-  margin-right: 20px;
-  padding: 0;
+  margin: 0 20px 0 0;
+  padding: 8px 0px;
 }
 .navbar-icons li {
-  color: #fff;
+  color: #d1d5db;
   cursor: pointer;
-  transition: 0.3s;
-}
-.navbar-icons li:hover {
-  color: gold;
-  transform: scale(1.2);
+  transition: transform 0.3s, color 0.3s;
 }
 
+
+/* ================== BURGER BUTTON ANIMATION ================== */
+.burger-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  color: #d1d5db;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: transform 0.35s ease;
+}
+
+
+
+.burger-btn.open {
+  transform: rotate(90deg);
+}
+.burger-btn:hover{
+  color: #eec84d;
+}
+
+/* overlap icons and animate */
+.burger-btn .icon {
+  position: absolute;
+  transition: opacity 0.25s ease, transform 0.35s ease;
+}
+.burger-btn .icon.hamburger {
+  opacity: 1;
+  transform: scale(1);
+}
+.burger-btn.open .icon.hamburger {
+  opacity: 0;
+  transform: scale(0.85) rotate(90deg);
+}
+.burger-btn .icon.cross {
+  opacity: 0;
+  transform: scale(0.85) rotate(-90deg);
+}
+.burger-btn.open .icon.cross {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+/* ================== DROPDOWN (SLIDE + FADE) ================== */
 .toggle-items {
   position: absolute;
   top: 90px;
   right: 5px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 10px;
   background: #1a1a1a;
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 15px 20px;
   min-width: 130px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-  animation: slideDown 0.3s ease-in-out;
-  transform-origin: top right;
-  z-index: 1000;
-}
 
-/* Smooth fade + drop animation */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: scale(0.95) translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
+  /* closed state */
+  max-height: 0;
+  padding: 0 20px;
+  opacity: 0;
+  transform: translateY(-8px);
+  overflow: hidden;
+  pointer-events: none;
 
-.toggle-items p {
-  color: #f2f2f2;
+  transition:
+    max-height 0.35s ease,
+    opacity 0.25s ease,
+    transform 0.35s ease,
+    padding 0.35s ease;
+}
+.toggle-items a {
+  text-decoration: none;
+}
+.toggle-items p,
+.toggle-items .menu-btn {
+  color: #d1d5db;
   font-size: 15px;
   font-weight: 500;
   text-decoration: none;
@@ -75,20 +149,79 @@
   border-radius: 8px;
   margin: 0;
   cursor: pointer;
-  transition: all 0.3s ease;
   letter-spacing: 0.3px;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  transition: transform 0.3s, background 0.3s, color 0.3s, box-shadow 0.3s;
 }
-
-/* Hover effect: golden glow */
-.toggle-items p:hover {
+.toggle-items p:hover,
+.toggle-items .menu-btn:hover {
   background: linear-gradient(90deg, #facc15 0%, #eab308 100%);
   color: #1a1a1a;
   transform: translateX(4px);
   box-shadow: 0 0 12px rgba(250, 204, 21, 0.5);
 }
 
-.toggle-items a {
-  text-decoration: none;
+/* open state */
+.toggle-items.open {
+  max-height: 300px;
+  padding: 15px 20px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
+/* ================== MEDIA ================== */
+@media (max-width: 1224px){
+  .username{
+    font-size: 1.3rem;
+  }
+}
+@media (max-width: 600px) {
+  .navbar {
+    padding: 10px;
+  }
+  .logo {
+    margin-left: 10px;
+    height: 70px;
+    width: 120px;
+  }
+  .navbar-icons {
+    margin-right: 10px;
+    gap: 15px;
+  }
+  .username{
+    font-size: 1.2rem;
+  }
+}
 
+@media (max-width: 400px) {
+  .toggle-items {
+    min-width: 110px;
+    padding: 0 15px;
+  }
+  .toggle-items.open {
+    padding: 12px 15px;
+    top: 101px;
+  }
+  .logo {
+    margin-left: 0;
+    height: 70px;
+    width: 115px;
+  }
+  .icon{
+    font-size: 38px;
+  }
+  .cart{
+    font-size: 38px;
+  }
+      .navbar-icons {
+        margin-right: 2px;
+        gap: 18px;
+    }
+    .username{
+      font-size: 1rem;
+    }
+
+}

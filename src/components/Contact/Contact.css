@@ -7,11 +7,8 @@
   align-items: center;
   padding: 60px 20px;
   box-sizing: border-box;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color: #e6e6e6;
 }
 
-/* card */
 .contact-card {
   width: 100%;
   max-width: 980px;
@@ -24,13 +21,15 @@
 
 /* header */
 .contact-header h1 {
-  color: #ffd700; /* gold */
-  font-size: 2rem;
-  margin: 0 0 8px 0;
+      text-align: center;
+    margin-bottom: 30px;
+    color: #eec84d;
+    font-size: 3rem;
+    font-weight: 500;
 }
 
 .contact-header .lead {
-  color: #d7d7d7;
+  color: #bdbdbd;
   margin: 0 0 22px 0;
   line-height: 1.6;
 }
@@ -90,7 +89,7 @@ input:focus, textarea:focus {
 }
 
 .btn-primary {
-  background: linear-gradient(180deg,#ffd700,#f0c200);
+  background: #eec84d;
   color: #111;
   border: none;
   padding: 12px 20px;
@@ -108,6 +107,10 @@ input:focus, textarea:focus {
 .status {
   font-size: 0.95rem;
   color: #bdbdbd;
+}
+
+.emailId{
+  color: #eec84d;
 }
 
 .status.success { color: #9ae6b4; }
@@ -134,4 +137,13 @@ input:focus, textarea:focus {
   .contact-header h1 {
     font-size: 1.6rem;
   }
+}
+
+
+
+
+@media (max-width: 480px) {
+    .contact-header h1 {
+        font-size: 2rem;
+    }
 }

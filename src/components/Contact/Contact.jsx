@@ -129,7 +129,7 @@ const Contact = () => {
           </div>
 
           <p className="note">
-            We will respond to inquiries at <strong>noorechandani.info@gmail.com</strong>. For order issues,
+            We will respond to inquiries at <strong className="emailId">noorechandani.info@gmail.com</strong>. For order issues,
             please include your order number in the message.
           </p>
         </form>

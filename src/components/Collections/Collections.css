@@ -4,57 +4,52 @@
   display: flex;
   flex-direction: column;
   background-color: #000000;
-  padding: 100px 40px; /* 🌟 Added breathing space around */
+  padding: 100px 40px;
   color: #f5f5f5;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-/* Title */
 .collections h2 {
-  font-size: 2.5rem;
-  margin-bottom: 50px;
- color: #E5C55B;
+  font-size: 3rem;
+  margin-bottom: 22px;
+ color: #eec84d;
+ margin-bottom: 3rem;
  font-family: "Cormorant Garamond", serif;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
-/* Grid layout */
 .collections-items {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 100px; /* reduced slightly for compact layout */
-  margin-top: 20px;
+  gap: 100px;
   width: 100%;
   max-width: 1100px;
-  padding: 0 20px; /* inner spacing */
+  
 }
 
-/* Card */
 .card {
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.05);
   text-decoration: none;
   background-color: #111;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  padding: 12px; /* 🌟 added inner padding for neat spacing */
+  padding: 12px;
   width: 100%;
-  max-width: 300px; /* 🌟 smaller card width */
-  margin: 0 auto; /* center cards in grid cells */
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.15);
+  box-shadow: 0 5px 10px rgba(255, 215, 0, 0.15);
 }
 
-/* Image */
 .card img {
   width: 100%;
-  height: 220px; /* 🌟 smaller height */
+  height: 220px;
   object-fit: cover;
   border-radius: 10px;
   transition: transform 0.4s ease;
@@ -64,19 +59,15 @@
   transform: scale(1.05);
 }
 
-/* Title inside card */
 .card h3 {
   text-align: center;
   padding: 10px 5px 5px;
-  font-size: 20px; /* slightly smaller font */
-  color: wheat;
+  font-size: 1.1rem;
+  color: #dbdbdb;
   font-weight: 500;
   letter-spacing: 1px;
 }
 
-/* ----------- Responsive Styles ----------- */
-
-/* Tablets (<=1024px) */
 @media (max-width: 1024px) {
   .collections {
     padding: 80px 80px;
@@ -84,12 +75,9 @@
 
   .collections-items {
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    gap: 50px;
   }
 
-  .collections h2 {
-    font-size: 2.2rem;
-  }
   .card{
     margin-top: 20px
   }
@@ -99,7 +87,6 @@
   }
 }
 
-/* Mobiles (<=768px) */
 @media (max-width: 768px) {
   .collections {
     padding: 60px 60px;
@@ -107,11 +94,11 @@
 
   .collections-items {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 20px;
   }
 
   .collections h2 {
-    font-size: 1.9rem;
+    font-size: 2rem;
     margin-bottom: 24px;
   }
 
@@ -125,6 +112,16 @@
   }
 
   .card h3 {
-    font-size: 18px;
+    font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 420px) {
+  .collections-items{
+    margin-right: 24px;
+  }
+  .collections h2{
+    color: #eec84d;
   }
 }

@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+
+
+.thankyou-container {
+  background-color: #111;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  text-align: center;
+}
+
+/* Heading */
+.thankyou-heading {
+ font-size: 3rem;
+  margin-top: 15px;
+  margin-bottom: 22px;
+  color: #eec84d;
+  letter-spacing: 1px;
+  font-family: "Cormorant Garamond", serif; 
+}
+
+/* Primary text (pure white) */
+.thankyou-text {
+  color: #ffffff;
+  font-size: clamp(1rem, 3.2vw, 1.3rem);
+  margin-top: 1rem;
+}
+
+/* Secondary text (dull white) */
+.thankyou-subtext {
+  color: #bdbdbd;
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
+  margin-top: 0.5rem;
+}
+
+/* Button */
+.thankyou-button {
+  margin-top: 2rem;
+  padding: clamp(10px, 2.6vw, 14px) clamp(18px, 6vw, 28px);
+  border: none;
+  border-radius: 8px;
+  background-color: #eec84d;
+  color: #111;
+  font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
+  width: fit-content;
+}
+
+.thankyou-button:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.thankyou-button:focus {
+  outline: 2px solid #eec84d;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(238, 200, 77, 0.25);
+}
+
+/* ===== Layout Tweaks for Larger Screens ===== */
+@media (min-width: 992px) {
+  .thankyou-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+}
+
+/* ===== Tablet (<= 768px) ===== */
+@media (max-width: 768px) {
+  .thankyou-container {
+    min-height: 70vh;
+  }
+  .thankyou-button {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+/* ===== Mobile (<= 480px) ===== */
+@media (max-width: 480px) {
+  .thankyou-container {
+    padding: 1.25rem;
+    min-height: 65vh;
+  }
+  .thankyou-heading {
+    font-size: 34px;
+  }
+
+  .thankyou-heading {
+    letter-spacing: 0.2px;
+  }
+
+  .thankyou-text,
+  .thankyou-subtext {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 90%; /* better readability on small screens */
+  }
+
+  .thankyou-button {
+    width: 80%;
+    border-radius: 10px;
+  }
+}

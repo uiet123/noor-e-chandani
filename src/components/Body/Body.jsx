@@ -4,9 +4,11 @@ import { Outlet } from "react-router-dom";
 import Footer from "../Footer/Footer";
 const Body = () => {
   return (
-    <div>
+     <div className="app-shell">
       <Navbar />
-      <Outlet />
+      <main className="app-content">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );

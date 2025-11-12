@@ -21,7 +21,7 @@
   padding: 12px;
 }
 .shipping-hero h1 {
-  color: #ffd54a;
+  color: #eec84d;
   margin: 0 0 8px 0;
   font-size: 30px;
 }
@@ -72,7 +72,7 @@
 .shipping-card h3 {
   margin: 0 0 8px 0;
   font-size: 15px;
-  color: #ffd54a;
+  color: #eec84d;
 }
 .shipping-card p { margin: 6px 0; color: #bfc9cc; font-size: 14px; }
 
@@ -117,11 +117,11 @@
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.03);
 }
-.shipping-cta h3 { margin: 0 0 8px 0; color: #ffd54a; font-size: 18px; }
+.shipping-cta h3 { margin: 0 0 8px 0; color: #eec84d; font-size: 18px; }
 .shipping-cta p { margin: 0 0 12px 0; color: #9aa6ad; }
 .btn-primary {
   display: inline-block;
-  background: #ffd54a;
+  color: #eec84d;
   color: #07121a;
   padding: 10px 16px;
   border-radius: 8px;

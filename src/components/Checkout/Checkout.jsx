@@ -7,9 +7,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Checkout = () => {
-
-
-
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
   const allProducts = useSelector((state) => state.product.allProducts);
@@ -28,147 +25,126 @@ const Checkout = () => {
   const [errors, setErrors] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartProducts, setCartProducts] = useState([]);
-
   const [isProcessing, setisProcessing] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
   const [currentOrderId, setCurrentOrderId] = useState(null);
 
+  const pollPaymentStatus = async (orderId) => {
+    const attempts = 6; 
+    const delayMs = 2000; 
+    for (let i = 0; i < attempts; i++) {
+      try {
+        const res = await axios.get(`${BASE_URL}/payment/status/${orderId}`, {
+          withCredentials: true,
+        });
+        const st = (res.data?.status || "").toLowerCase();
+        console.log(`Poll ${i + 1}:`, st);
 
+        if (st === "captured" || st === "authorized") {
+          setPaymentError(null);
+          dispatch(ClearCart());
+          navigate("/thank-you");
+          return { ok: true, status: st };
+        }
 
-  // Step 2: Polling helper — paste inside component (after states)
-const pollPaymentStatus = async (orderId) => {
-  const attempts = 6;       // total attempts
-  const delayMs = 2000;     // 2 seconds between attempts
-
-  for (let i = 0; i < attempts; i++) {
-    try {
-      const res = await axios.get(`${BASE_URL}/payment/status/${orderId}`, { withCredentials: true });
-      const st = (res.data?.status || "").toLowerCase();
-      console.log(`Poll ${i+1}:`, st);
-
-      if (st === "captured" || st === "authorized") {
-        // success
-        setPaymentError(null);
-        dispatch(ClearCart());
-        navigate("/thank-you");
-        return { ok: true, status: st };
+        if (st === "failed" || st === "cancelled" || st === "refused") {
+          setPaymentError("❌ Payment failed — please try again.");
+          return { ok: false, status: st };
+        }
+      } catch (err) {
+        console.warn("poll error:", err?.response?.data || err.message);
       }
 
-      if (st === "failed" || st === "cancelled" || st === "refused") {
-        setPaymentError("❌ Payment failed — please try again.");
-        return { ok: false, status: st };
-      }
-
-      // else: pending/created -> wait and retry
-    } catch (err) {
-      console.warn("poll error:", err?.response?.data || err.message);
-      // ignore and continue retrying
+      await new Promise((r) => setTimeout(r, delayMs));
     }
 
-    // wait before next attempt
-    await new Promise((r) => setTimeout(r, delayMs));
-  }
-
-  // timed out -> still pending
-  setPaymentError("⌛ Payment pending. If amount was debited, check Orders after a minute.");
-  return { ok: false, status: "pending" };
-};
-
-
-
+    setPaymentError(
+      "⌛ Payment pending. If amount was debited, check Orders after a minute."
+    );
+    return { ok: false, status: "pending" };
+  };
 
   const verifyPayment = async (razorpayResponse) => {
-    try{
+    try {
       setisProcessing(true);
       setPaymentError(null);
 
       const orderId = razorpayResponse?.razorpay_order_id;
 
-        if (!orderId) {
-      console.error("No razorpay_order_id in response:", razorpayResponse);
-      setPaymentError("❌ Payment response missing order ID.");
-      return;
-    }
+      if (!orderId) {
+        console.error("No razorpay_order_id in response:", razorpayResponse);
+        setPaymentError("❌ Payment response missing order ID.");
+        return;
+      }
 
-    setCurrentOrderId(orderId);
+      setCurrentOrderId(orderId);
 
-    const result = await pollPaymentStatus(orderId);
-       if (result.ok) {
-      // pollPaymentStatus ne khud success handle kar liya (redirect, clear cart)
-      console.log("Payment verified successfully:", result.status);
-    } else {
-      // poll ne fail ya pending diya
-      console.log("Payment verification result:", result.status);
-    }
-
-
-    }catch(err){
+      const result = await pollPaymentStatus(orderId);
+      if (result.ok) { 
+        console.log("Payment verified successfully:", result.status);
+      } else { 
+        console.log("Payment verification result:", result.status);
+      }
+    } catch (err) {
       console.error("verifyPayment error:", err?.response?.data || err.message);
-    setPaymentError("❌ Could not verify payment. Please try again or check your Orders.");
+      setPaymentError(
+        "❌ Could not verify payment. Please try again or check your Orders."
+      );
+    } finally {
+      setisProcessing(false); 
     }
-     finally {
-    setisProcessing(false);  // loader stop
-  }
-  }
-
+  };
 
   const handleClick = async () => {
-    try{
-        const items = cartProducts.map((p) => ({
-      productId: p._id,
-      name: p.name,
-      price: p.price,
-      quantity: cartItems[p._id],
-      image: p.image,
-    }));
+    validateForm()
+    try {
+      const items = cartProducts.map((p) => ({
+        productId: p._id,
+        name: p.name,
+        price: p.price,
+        quantity: cartItems[p._id],
+        image: p.image,
+      }));
 
-       const payload = {
-      items,
-      shippingAddress: address,
-      subtotal: totalPrice,
-      shippingCharge: 50,
-      totalAmount: totalPrice + 50,
-    };
+      const payload = {
+        items,
+        shippingAddress: address,
+        subtotal: totalPrice,
+        shippingCharge: 50,
+        totalAmount: totalPrice + 50,
+      };
 
-      const res = await axios.post(BASE_URL + "/payment/create" , 
-      payload
-    , {withCredentials: true})
+      const res = await axios.post(BASE_URL + "/payment/create", payload, {
+        withCredentials: true,
+      });
 
-    const {amount, keyId, currency, notes, orderId} = res.data
+      const { amount, keyId, currency, notes, orderId } = res.data;
       var options = {
-    key: keyId, 
-    amount: amount, 
-    currency: currency,
-    name: "Noor-e-Chandani",
-    description: "Thanks for shopping with us",
-    order_id: orderId, 
-    prefill: { 
-        name: notes.firstName + " " + notes.lastName,
-        email: notes.emailId,
-    },
-    theme: {
-        color: "gold"
-    },
-    handler : verifyPayment
-};
-    
+        key: keyId,
+        amount: amount,
+        currency: currency,
+        name: "Noor-e-Chandani",
+        description: "Thanks for shopping with us",
+        order_id: orderId,
+        prefill: {
+          name: notes.firstName + " " + notes.lastName,
+          email: notes.emailId,
+        },
+        theme: {
+          color: "gold",
+        },
+        handler: verifyPayment,
+      };
 
-    const rzp = new window.Razorpay(options)
-  rzp.open();
-
-     console.log("Payment create response:", res.data);
-  
-    }
-    catch(err){
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+      setErrors({})
+    } catch (err) {
       console.log(err);
-      alert("❌ Error calling /payment/create API");
     }
-    
-  }
+  };
 
-
-
-  // 🧮 Calculate Total and Filter Products
+  
   useEffect(() => {
     const filtered = allProducts.filter((p) => cartItems[p._id]);
     setCartProducts(filtered);
@@ -179,7 +155,6 @@ const pollPaymentStatus = async (orderId) => {
     setTotalPrice(total);
   }, [cartItems, allProducts]);
 
-  // ✅ Basic Address Validation
   const validateForm = () => {
     let temp = {};
     if (!address.fullName) temp.fullName = "Full name is required";
@@ -194,17 +169,10 @@ const pollPaymentStatus = async (orderId) => {
     return Object.keys(temp).length === 0;
   };
 
-  const handlePayment = () => {
-    if (!validateForm()) return;
-    alert("✅ Checkout successful (frontend-only demo)");
-    dispatch(ClearCart());
-  };
-
   return (
     <div className="checkout-container">
       <h2>Checkout</h2>
       <div className="checkout-grid">
-        {/* Address Form */}
         <div className="address-section">
           <h3>Shipping Address</h3>
           <div className="form-group">
@@ -287,7 +255,6 @@ const pollPaymentStatus = async (orderId) => {
           </div>
         </div>
 
-        {/* Order Summary */}
         <div className="order-summary">
           <h3>Order Summary</h3>
           <div className="summary-items">
@@ -317,33 +284,32 @@ const pollPaymentStatus = async (orderId) => {
             </p>
           </div>
 
-          <button onClick={() => handleClick()} className="pay-btn" disabled={isProcessing}>
+          <button
+            onClick={() => handleClick()}
+            className="pay-btn"
+            disabled={isProcessing}
+          >
             {isProcessing ? "Processing..." : "Pay and Proceed"}
           </button>
 
-            {paymentError && (
-  <div className="payment-result">
-    <p>{paymentError}</p>
-
-    <div className="payment-actions">
-      {/* Retry or Refresh button */}
-      <button
-        onClick={() => {
-          if (currentOrderId) pollPaymentStatus(currentOrderId);
-          else handleClick(); // if no order, start new
-        }}
-      >
-        {currentOrderId ? "Refresh Status" : "Retry Payment"}
-      </button>
-
-      {/* View Orders */}
-      <button onClick={() => (window.location.href = "/orders")}>
-        View Orders
-      </button>
-    </div>
-  </div>
-)}
-
+          {paymentError && (
+            <div className="payment-result">
+              <p>{paymentError}</p>
+              <div className="payment-actions">
+                <button
+                  onClick={() => {
+                    if (currentOrderId) pollPaymentStatus(currentOrderId);
+                    else handleClick();
+                  }}
+                >
+                  {currentOrderId ? "Refresh Status" : "Retry Payment"}
+                </button>
+                <button onClick={() => (window.location.href = "/orders")}>
+                  View Orders
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@
 }
 
 .privacy-title {
-  color: #ffd700; /* gold */
+  color: #eec84d;
   font-size: 2.1rem;
   margin: 0 0 18px 0;
   text-align: left;
@@ -54,7 +54,7 @@
 }
 
 .privacy-section a {
-  color: #ffd700;
+ color: #eec84d;
   text-decoration: none;
   font-weight: 600;
 }

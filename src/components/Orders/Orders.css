@@ -1,35 +1,35 @@
 .orders-page {
-  background-color: #0b0b0b;
-  color: #f8f8f8;
+  background-color: #111;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   min-height: 100vh;
-  padding: 60px 8vw;
+  padding: 10px 20px;
   font-family: "Inter", sans-serif;
 }
 
 .orders-heading {
   text-align: center;
-  font-size: 2rem;
-  font-weight: 600;
-  background: linear-gradient(to right, gold, #fff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 40px;
+ font-size: 3rem;
+  margin-top: 15px;
+  margin-bottom: 22px;
+  color: #eec84d;
+  font-family: "Cormorant Garamond", serif;
+  letter-spacing: 1px;
 }
 
 .order-box {
   background: #111;
   border-radius: 12px;
   padding: 20px;
+  width: 80%;
+  margin: 0 auto;
   margin-bottom: 25px;
-  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.15);
+  box-shadow: 0 5px 10px rgba(255, 215, 0, 0.15);
   transition: 0.3s ease;
 }
 
-.order-box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 25px rgba(255, 215, 0, 0.25);
-}
 
 .order-header {
   display: flex;
@@ -88,7 +88,7 @@
 }
 
 .order-summary strong {
-  color: gold;
+  color: #eec84d
 }
 
 .pending {
@@ -120,14 +120,16 @@
     flex-direction: column;
     gap: 5px;
   }
+  .orders-heading {
+    font-size: 2rem;
+  }
 
   .order-item {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
   }
 
   .order-item-image {
-    width: 100%;
+    width: 28%;
     height: auto;
   }
 

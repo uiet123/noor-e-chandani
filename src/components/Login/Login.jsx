@@ -12,8 +12,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    email: "Prince@gmail.com",
-    password: "Prince@123",
+    email: "",
+    password: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -88,14 +88,18 @@ const Login = () => {
   return (
     <div className="login-page">
       <form className="login-card" onSubmit={handleLogin} noValidate>
-        <h2 className="login-heading">Welcome back</h2>
+        <h2 className="login-heading">Sign In</h2>
         <p className="login-sub">Login to manage Noor-e-Chandani</p>
+
+        <GoogleLogin />
+
+        <h3 className="or">Or</h3>
 
         {error && <div className="alert alert-error">{error}</div>}
         {success && <div className="alert alert-success">{success}</div>}
 
         <label className="field">
-          <span className="label-text">Email</span>
+          <span className="label-text-signIn">Email</span>
           <input
             type="email"
             name="email"
@@ -110,7 +114,7 @@ const Login = () => {
 
         <label className="field">
           <div className="label-row">
-            <span className="label-text">Password</span>
+            <span className="label-text-signIn">Password</span>
             <button
               type="button"
               className="toggle-pass"
@@ -140,13 +144,13 @@ const Login = () => {
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>
-        <h3>Or</h3>
-        <GoogleLogin />
+        
+        
         
 
         <div className="login-footer">
           <p className="small">
-            Don't have an account? <span onClick={() => navigate("/signup")} className="muted">Click here to Sign up</span>
+            Don't have an account? <span onClick={() => navigate("/signup")} className="muted" style={{color:"#eec84d"}}>Click here to Sign up</span>
           </p>
         </div>
       </form>

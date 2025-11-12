@@ -4,16 +4,17 @@
 .about {
   padding: 80px 20px;
   font-family: "Cormorant Garamond", serif;
-  background: #111; /* dark bg for contrast */
+  background: #111; 
   color: #f5f5f5;
   text-align: center;
 }
 
 .about h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+  font-size: 3rem;
+  margin-top: 15px;
+  margin-bottom: 22px;
   color: #eec84d;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 .about p {
@@ -21,7 +22,7 @@
   margin: 0 auto 20px;
   font-size: 1.2rem;
   line-height: 1.8;
-  color: #ddd;
+  color: #d1d5db
 }
 
 .about p:last-child {
@@ -46,12 +47,12 @@
     padding: 40px 10px;
   }
   .about h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
   .about p {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
+    line-height: 1.8rem;
   }
-  .highlight{
-    display: none;
-  }
+
+  
 }

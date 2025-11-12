@@ -5,6 +5,7 @@ import axios from 'axios';
 import { addUser } from '../../store/userSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import "./GoogleLogin.css"
 
 const GoogleLogin = () => {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const GoogleLogin = () => {
                 console.log("Google login success:", JSON.stringify(res.data, null, 2));
                 dispatch(addUser(res.data.data));
                 navigate("/");
-                // You can now send this code to your backend to exchange for tokens
+               
             }
             
         }catch(err){
@@ -36,9 +37,13 @@ const GoogleLogin = () => {
 
     
   return (
-    <div>
-        <button onClick={() => googleLoginButton()} type='button'>Sign Up with Google</button>
-    </div>
+   <div className="google-login">
+  <button className="google-login__btn" onClick={googleLoginButton} type="button">
+    <img className="google-login__logo" src="/google_logo.png" alt="Google logo" />
+    Sign in with Google
+  </button>
+</div>
+
   )
 }
 

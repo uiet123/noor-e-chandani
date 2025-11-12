@@ -11,11 +11,11 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    firstName: "Usha",
-    lastName: "Devi",
-    email: "Usha@gmail.com",
-    password: "Usha@123",
-    confirmPassword: "Usha@123",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -78,8 +78,6 @@ const Signup = () => {
         withCredentials: true,
         timeout: 15000,
       });
-
-      // typical response: { message: "...", data: savedUser }
       
       if (res.status === 200 || res.status === 201) {
         dispatch(addUser(res?.data?.data));
@@ -104,7 +102,7 @@ const Signup = () => {
   return (
     <div className="signup-page">
       <form className="signup-card" onSubmit={handleSignup} noValidate>
-        <h2 className="signup-heading">Create account</h2>
+        <h2 className="signup-heading">Sign Up</h2>
         <p className="signup-sub">Start your Noor-e-Chandani journey</p>
 
         {error && <div className="alert alert-error">{error}</div>}
@@ -200,7 +198,7 @@ const Signup = () => {
 
         <div className="signup-footer">
           <p className="small">
-            Already have an account? <span className="muted" onClick={() => navigate("/login")} style={{cursor: "pointer"}}>Click here to Sign in</span>
+            Already have an account? <span className="muted" onClick={() => navigate("/login")} style={{cursor: "pointer", color:"#eec84d"}}>Click here to Sign in</span>
           </p>
         </div>
       </form>

@@ -1,15 +1,13 @@
 /* Signup.css — component scoped (no global :root) */
 
 .signup-page {
-  min-height: 100vh;
   background: #111;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 36px 16px;
   box-sizing: border-box;
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  color: #e6e6e6;
+  color: #ffffff;
 }
 
 .signup-card {
@@ -23,16 +21,18 @@
 }
 
 .signup-heading {
-  margin: 0 0 6px 0;
-  color: #ffd700;
-  font-size: 1.6rem;
-  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #eec84d;
+  font-size: 3rem;
+  font-weight: 500;
 }
 
 .signup-sub {
-  margin: 0 0 18px 0;
-  color: #d6d6d6;
-  font-size: 0.95rem;
+    margin-bottom: 30px;
+  color: #bdbdbd;
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 /* alerts */
@@ -77,9 +77,9 @@
 }
 
 .label-text {
-  color: #ffd700;
+  color: #bdbdbd;
   font-weight: 600;
-  font-size: 0.93rem;
+  font-size: 1.1rem;
 }
 
 /* small row */
@@ -127,11 +127,18 @@
   padding: 12px 14px;
   border-radius: 10px;
   border: none;
+  font-size: 1.2rem;
   cursor: pointer;
-  background: linear-gradient(180deg, #ffd700, #f0c200);
+  background: #eec84d;
   color: #111;
   font-weight: 700;
   margin-top: 8px;
+  transition: transform 0.25s ease-in-out, background 0.25s ease-in-out;
+}
+
+.signup-btn:hover{
+  transform: scale(1.02);
+  background: #ffd966;;
 }
 
 .signup-btn:disabled {
@@ -156,7 +163,7 @@
 }
 
 /* responsive */
-@media (max-width: 520px) {
+@media (max-width: 480px) {
   .field-row {
     flex-direction: column;
   }
@@ -164,4 +171,13 @@
   .signup-card {
     padding: 20px;
   }
+  .signup-heading {
+  font-size: 2rem;
+}
+.signup-sub {
+  font-size: 1rem;
+}
+.signup-btn{
+  font-size: 1rem;
+}
 }

@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet');
 
-
+html{
+  font-size: 15px; 
+}
+html, body, #root { height: 100%; }
 *{
   padding: 0;
   margin: 0;
@@ -12,3 +15,25 @@ body{
   font-style: normal;
  height: 100%;
 }
+
+
+
+
+
+/* layout container */
+.app-shell{
+  min-height: 100vh;      /* screen ke barabar */
+  display:flex;
+  flex-direction:column;
+}
+
+/* beech ka area stretch */
+.app-content{
+  flex:1;                 /* <- ye footer ko neeche push karega */
+  display:flex;
+  flex-direction:column;
+  background: #111;
+}
+
+/* safety: footer fixed/absolute bilkul nahi hona chahiye */
+footer.footer{ position: static; }
