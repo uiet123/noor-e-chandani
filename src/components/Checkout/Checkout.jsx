@@ -96,8 +96,10 @@ const Checkout = () => {
   };
 
   const handleClick = async () => {
-    validateForm()
     try {
+      if(!validateForm()){ 
+            throw new Error("Please fill the form correctly")
+    }
       const items = cartProducts.map((p) => ({
         productId: p._id,
         name: p.name,

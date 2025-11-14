@@ -23,6 +23,7 @@ import Orders from "./components/Orders/Orders";
 import { BASE_URL } from "./utils/constants";
 import { addUser } from "./store/userSlice";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import ScrollToTop from "./components/ScrollToTop";
 const App = () => {
   const dispatch = useDispatch();
 
@@ -39,10 +40,14 @@ const App = () => {
       }
     }
     getUser();
+    window.scrollTo(0, 0);
   }, []);
+  
+
 
   return (
     <BrowserRouter>
+     <ScrollToTop behavior="smooth" />
       <Routes>
         <Route  element={<Body />}>
           <Route path="/" element={<Hero />} />
@@ -65,6 +70,7 @@ const App = () => {
           </Route>
         </Route>
       </Routes>
+      <ScrollToTop />
     </BrowserRouter>
   );
 };

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet');
 
+
+
 html{
   font-size: 15px; 
 }
@@ -33,6 +35,7 @@ body{
   display:flex;
   flex-direction:column;
   background: #111;
+  min-height: 48vh;
 }
 
 /* safety: footer fixed/absolute bilkul nahi hona chahiye */
