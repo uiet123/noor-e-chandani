@@ -46,10 +46,6 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-.faq-item:hover {
-  border-color: #ffd54a;
-  background-color: #101d23;
-}
 
 .faq-question {
   display: flex;

@@ -14,7 +14,15 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const cartItems = useSelector((state) => state.cart.items)
-  const cartCount = Object.values(cartItems).reduce((total, qty) => total + qty, 0);
+  const customItems = useSelector((state) => state.cart.customItems)
+  const cartCount = Object.values(cartItems).reduce((sum, item) => {
+  return sum + (typeof item === "number" ? item : item.quantity);
+}, 0);
+  const customItemsCount = customItems.reduce(
+  (total, item) => total + item.quantity,
+  0
+);
+  const totalCount = customItemsCount + cartCount;
   const userFirstName =
     user?.firstName?.trim().split(/\s+/)[0] ||
     user?.name?.trim().split(/\s+/)[0] ||
@@ -45,7 +53,7 @@ const Navbar = () => {
         <Link to="/cart"> <li className="cart">
           <PiShoppingCartSimple />
         </li></Link>
-     { cartCount > 0 && <p className="cart-number">{cartCount}</p>}
+     { totalCount > 0 && <p className="cart-number">{totalCount}</p>}
 
         {/* Burger Button – icons ko mount/unmount mat karo */}
         <li>
@@ -75,6 +83,9 @@ const Navbar = () => {
         )}
         <Link to="/orders">
           <p onClick={() => setToggle(false)}>Orders</p>
+        </Link>
+        <Link to="/allproducts">
+          <p onClick={() => setToggle(false)}>All Products</p>
         </Link>
         <Link to="/contact">
           <p onClick={() => setToggle(false)}>Contact Us</p>

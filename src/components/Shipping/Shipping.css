@@ -3,7 +3,7 @@
 /* page wrapper */
 .shipping-page {
   background: #111;
-  color: #e6eef0;
+  color: #d1d5db;
   min-height: 100vh;
   padding: 40px 16px 80px;
   box-sizing: border-box;
@@ -26,10 +26,13 @@
   font-size: 30px;
 }
 .shipping-hero p {
-  color: #9aa6ad;
+  color: #d1d5db;
   margin: 0;
   font-size: 15px;
   line-height: 1.6;
+}
+.email-shipping{
+  color: #eec84d;
 }
 
 /* main content area */
@@ -50,7 +53,7 @@
 
 .shipping-section h2 {
   margin: 0 0 10px 0;
-  color: #f3f4f6;
+  color: #fff;
   font-size: 18px;
 }
 
@@ -74,13 +77,13 @@
   font-size: 15px;
   color: #eec84d;
 }
-.shipping-card p { margin: 6px 0; color: #bfc9cc; font-size: 14px; }
+.shipping-card p { margin: 6px 0; color: #d1d5db; font-size: 14px; }
 
 /* bullet and numbered lists */
 .bullet-list, .numbered-list {
   margin: 8px 0 0 0;
   padding-left: 18px;
-  color: #bfc9cc;
+  color: #d1d5db;
   font-size: 14px;
 }
 .numbered-list { list-style: decimal; }
@@ -91,7 +94,7 @@
   padding: 12px;
   background: rgba(255,255,255,0.02);
   border-radius: 8px;
-  color: #cfe6e9;
+  color: #d1d5db;
   font-size: 14px;
 }
 
@@ -118,7 +121,7 @@
   border: 1px solid rgba(255,255,255,0.03);
 }
 .shipping-cta h3 { margin: 0 0 8px 0; color: #eec84d; font-size: 18px; }
-.shipping-cta p { margin: 0 0 12px 0; color: #9aa6ad; }
+.shipping-cta p { margin: 0 0 12px 0; color: #d1d5db; }
 .btn-primary {
   display: inline-block;
   color: #eec84d;

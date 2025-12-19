@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FaInstagram } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
 import "./Footer.css";
 
 const Footer = () => {
@@ -47,7 +50,13 @@ const Footer = () => {
           <h4>Contact Us</h4>
           <p>📍 Delhi NCR, India</p>
           <p>📧 <a href="mailto:support@noor-e-chandani.info">noorechandani.info@gmail.com</a></p>
-          <p>☎️ +91 7973270451</p>
+          <p>☎️ +91 9217284904</p>
+          <div className="social-media">
+            <Link to="https://www.instagram.com/noorechandani/"><FaInstagram /></Link>
+            <Link to="https://www.facebook.com/people/Noor-Chandani/61584125199270/?rdid=qfSB5JuDCs93YEky&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1a4YSH9Fyp%2F"><FaFacebook /></Link>
+            <Link to="https://www.youtube.com/@noorechandani"><FaYoutube /></Link>
+          </div>
+          
          
         </div>
       </div>

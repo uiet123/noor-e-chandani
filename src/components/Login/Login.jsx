@@ -17,7 +17,7 @@ const Login = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(""); // server or validation error
+  const [error, setError] = useState(""); 
   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -66,13 +66,13 @@ const Login = () => {
       if (userData) {
         dispatch(addUser(userData));
         setSuccess("Logged in successfully! Redirecting...");
-        // small delay so user sees message
+       
         setTimeout(() => navigate("/"), 800);
       } else {
         setError("Login failed. Please try again.");
       }
     } catch (err) {
-      // friendly error handling
+     
       const msg =
         err?.response?.data ||
         err?.response?.data?.message ||

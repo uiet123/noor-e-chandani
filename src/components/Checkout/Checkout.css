@@ -59,7 +59,7 @@
 }
 
 .form-group input[type="text"],
-.form-group input[type="number"],
+.form-group input[type="tel"],
 .form-group input[type="email"],
 .form-group input[disabled] {
   width: 95%;
@@ -115,7 +115,7 @@
 }
 
 .summary-totals {
-  margin-top: 10px;
+  margin-top: 20px;
   border-top: 1px dashed rgba(255, 255, 255, 0.08);
   padding-top: 12px;
 }
@@ -123,13 +123,8 @@
   display: flex;
   font-size: 15px;
   justify-content: space-between;
-  color: #bdbdbd;
+  color: #fff;
   font-weight: 600;
-}
-.grand-total {
-  font-size: 18px;
-  color: #bdbdbd;
-  margin-top: 10px;
 }
 
 .pay-btn {
@@ -196,7 +191,7 @@
 
 @media (max-width: 480px){
   .form-group input[type="text"],
-.form-group input[type="number"],
+.form-group input[type="tel"],
 .form-group input[type="email"],
 .form-group input[disabled] {
   width: 90%;

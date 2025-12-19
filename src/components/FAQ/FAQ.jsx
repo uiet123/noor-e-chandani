@@ -23,7 +23,7 @@ const FAQ = () => {
     {
       question: "Do you ship all over India?",
       answer:
-        "Yes, we ship pan-India via trusted courier partners. Delivery times vary between 3–7 business days depending on your location."
+        "Yes, we ship pan-India via trusted courier partners. Delivery times vary between 7-10 business days depending on your location."
     },
     {
       question: "How can I contact customer support?",

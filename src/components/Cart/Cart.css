@@ -20,6 +20,9 @@
   margin: 0 auto;
   margin-bottom: 30px;
 }
+.custom-cart-items{
+  margin-bottom: 10px;
+}
 .remove-button {
   background-color: red;
   padding: 10px 20px;
@@ -74,19 +77,27 @@
 
 .cart-footer-checkout{
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  gap: 30px;
+  gap: 22px;
 }
 
-.cart-footer h3{
+.cart-footer h6{
   color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+
+}
+.cart-footer-checkout-info{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .checkout-btn {
   background: #eec84d;
   border: none;
-  padding: 10px 30px;
+  padding: 12px 50px;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
@@ -160,6 +171,53 @@
 }
 .counter-in {
   display: none;
+}
+
+
+.coupon-section {
+  width: 80%;
+  margin: 0 auto 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.coupon-input {
+  padding: 10px;
+  width: 200px;
+  border-radius: 8px;
+  border: 1px solid #eec84d;
+  background: #111;
+  color: #fff;
+}
+
+.coupon-btn {
+  background: #eec84d;
+  color: #000;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.coupon-btn:disabled {
+  background: gray;
+  cursor: default;
+}
+
+.coupon-section-code{
+  display: flex;
+  gap: 15px;
+}
+
+.coupon-error{
+  color: red;
+}
+
+.coupon-success{
+  color: green;
 }
 
 @media (max-width: 480px) {

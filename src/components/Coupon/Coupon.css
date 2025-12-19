@@ -1,0 +1,25 @@
+.coupon-banner {
+  width: 100%;
+  background: #eec84d;
+  padding: 8px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.coupon-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #000;
+}
+
+@media (max-width: 600px) {
+  .coupon-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .coupon-text {
+    font-size: 0.8rem;
+  }
+}

@@ -24,6 +24,11 @@ import { BASE_URL } from "./utils/constants";
 import { addUser } from "./store/userSlice";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import ScrollToTop from "./components/ScrollToTop";
+import ProductDetails from "./components/ProductDetails/ProductDetails"
+import AllProducts from "./components/AllProducts/AllProducts";
+import Reviews from "./components/Reviews/Reviews";
+{/*import CustomCandlesAllProducts from "./components/CustomCandlesAllProducts/CustomCandlesAllProducts"
+import CustomCandleBuilder from "./components/CustomCandleBuilder/CustomCandleBuilder";*/}
 const App = () => {
   const dispatch = useDispatch();
 
@@ -51,8 +56,12 @@ const App = () => {
       <Routes>
         <Route  element={<Body />}>
           <Route path="/" element={<Hero />} />
+          <Route path="/reviews" element={<Reviews />} />
           <Route path="collections/:slug" element={<CollectionDetails />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/collections" element={<Collections />} />
+        {/*  <Route path="/custom-candle-allproducts" element={<CustomCandlesAllProducts />} /> 
+          <Route path="/customize/:slug" element={<CustomCandleBuilder />} />  */}
           <Route path="/about" element={<About />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/shipping" element={<Shipping />} />
@@ -61,6 +70,7 @@ const App = () => {
           <Route path="/terms" element={<Terms />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/allproducts" element={<AllProducts />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoute />}>

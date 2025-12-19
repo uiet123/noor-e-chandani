@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: #000; /* fallback background */
+  background: #000; 
 }
 
 /* 🎥 Video Styling */

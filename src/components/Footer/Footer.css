@@ -25,6 +25,14 @@ color: #eec84d;
   line-height: 1;
 }
 
+.social-media{
+  display: flex;
+  font-size: 25px;
+  margin-top: 10px;
+  color: #fff;
+  gap: 15px;
+}
+
 .footer-brand p {
   line-height: 1.6;
   color: #d1d5db;

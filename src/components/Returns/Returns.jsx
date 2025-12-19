@@ -13,8 +13,8 @@ const Returns = () => {
           an order has been delivered.
         </p>
         <p className="returns-text">
-          However, if your order arrives damaged or incorrect, please contact us
-          within <strong>24 hours of delivery</strong> with clear images at{" "}
+          However, please make a video while unboxing the parcel, on the basis of that video only the returns or refunds will be done if the parcel is damaged, please contact us
+          within <strong>24 hours of delivery</strong> with clear videos and pictures at{" "}
           <a href="mailto:noorechandani.info@gmail.com">
             noorechandani.info@gmail.com
           </a>

@@ -20,14 +20,14 @@ const Shipping = () => {
           <p>
             We ship pan-India via trusted courier partners. Orders are processed within
             <strong> 1–2 business days</strong>, and delivery typically takes
-            <strong> 3–7 business days</strong> depending on your location.
+            <strong> 7-10 business days</strong> depending on your location.
           </p>
 
           <div className="shipping-grid">
             <div className="shipping-card">
               <h3>Standard Delivery</h3>
-              <p>Cost: <strong>₹150</strong> (Free on orders above ₹999)</p>
-              <p>ETA: <strong>3–7 business days</strong></p>
+              <p>Cost: <strong>₹120</strong></p>
+              <p>ETA: <strong>7-10 business days</strong></p>
               <p>Suitable for regular orders across most pincodes.</p>
             </div>
 
@@ -51,7 +51,7 @@ const Shipping = () => {
           <ul className="bullet-list">
             <li>Transit time: <strong>7–21 business days</strong></li>
             <li>Customs & duties: Customer is responsible for any local import charges</li>
-            <li>Contact us for bulk/international quotes at <a href="mailto:noorechandani.info@gmail.com">noorechandani.info@gmail.com</a></li>
+            <li>Contact us for bulk/international quotes at <a className="email-shipping" href="mailto:noorechandani.info@gmail.com">noorechandani.info@gmail.com</a></li>
           </ul>
         </section>
 
@@ -76,7 +76,6 @@ const Shipping = () => {
           </p>
           <ul className="bullet-list">
             <li>All packages are inspected before dispatch.</li>
-            <li>If your order arrives damaged — keep photos and contact us within 48 hours.</li>
           </ul>
         </section>
 
@@ -86,6 +85,7 @@ const Shipping = () => {
   <li>
     We currently <strong>do not accept returns or exchanges</strong> once an order has been delivered.
   </li>
+  <li>Please make a video while unboxing the parcel, on the basis of that video only the returns or refunds will be done if the parcel is damaged.</li>
   <li>
     However, if your product arrives <strong>damaged, defective, or incorrect</strong>,
     please contact our support team within <strong>24 hours</strong> of delivery.
@@ -94,7 +94,7 @@ const Shipping = () => {
     Our team will review the issue and assist you with an appropriate resolution.
   </li>
   <li>
-    You can reach us at <strong>noorechandani.info@gmail.com</strong> for support.
+    You can reach us at <strong className="email-shipping">noorechandani.info@gmail.com</strong> for support.
   </li>
   </ul>
 </section>
@@ -104,7 +104,7 @@ const Shipping = () => {
           <div className="mini-grid">
             <div>
               <h4>How do I change my shipping address?</h4>
-              <p>If order is not shipped, contact support immediately at <a href="mailto:noorechandani.info@gmail.com">noorechandani.info@gmail.com</a>.</p>
+              <p>If order is not shipped, contact support immediately at <a className="email-shipping" href="mailto:noorechandani.info@gmail.com">noorechandani.info@gmail.com</a>.</p>
             </div>
             <div>
               <h4>Can I combine orders for shipping?</h4>
@@ -118,7 +118,7 @@ const Shipping = () => {
       <footer className="shipping-cta">
         <div className="cta-inner">
           <h3>Need help with shipping?</h3>
-          <p>Contact our support at <a href="mailto:noorechandani.info@gmail.com">noorechandani.info@gmail.com</a> or call <a href="tel:+917973270451">+91 7973270451</a></p>
+          <p>Contact our support at <a className="email-shipping" href="mailto:noorechandani.info@gmail.com">noorechandani.info@gmail.com</a> or call <a className="email-shipping" href="tel:+919217284904">+91 9217284904</a></p>
           <a className="btn-primary" href="/contact">Contact Us</a>
         </div>
       </footer>

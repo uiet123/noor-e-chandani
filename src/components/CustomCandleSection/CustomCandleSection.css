@@ -1,0 +1,154 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
+
+
+.custom-candles{
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    font-family: "Cormorant Garamond", serif;
+    text-align: center;
+    padding-bottom: 80px;
+}
+
+.custom-candles h2 {
+  font-size: 3rem;
+  margin-top: 15px;
+  margin-bottom: 40px;
+  color: #eec84d;
+  letter-spacing: 1px;
+}
+
+.CustomCandleSection{
+    padding: 0px 40px;
+    display: flex;
+    justify-content: center;
+    height: 480px;
+    background-color: black;
+    position: relative;
+}
+
+.custom-candle-img{
+    height: 100%;
+    width: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.custom-info{
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    flex-direction:column;
+    justify-content: end;
+    bottom: 70px;
+    right: 200px;
+    font-size: 2.2rem;
+    color: white;
+}
+.custom-btn{
+    width: 30%;
+    color: black;
+    background-color: #eec84d;
+    padding: 10px 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.custom-btn:hover{
+    background-color: #ffd966;
+}
+
+
+@media (max-width: 1024px) {
+
+  .custom-candles h2 {
+    font-size: 2.5rem;
+  }
+
+  .CustomCandleSection {
+    height: 420px;
+    padding: 0px 20px;
+  }
+
+  .custom-info {
+    bottom: 50px;
+    right: 120px;
+    font-size: 1.8rem;
+  }
+
+  .custom-btn {
+    width: 40%;
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .custom-candles h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+
+  .CustomCandleSection {
+    height: 360px;
+    padding: 0px 15px;
+  }
+
+  .custom-info {
+    bottom: 40px;
+    right: 50px;
+    align-items: flex-end;
+    font-size: 1.6rem;
+  }
+
+  .custom-btn {
+    width: 50%;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+    .custom-candles{
+        padding-top: 10px;
+        padding-bottom: 60px;
+    }
+
+  .custom-candles h2 {
+    font-size: 1.8rem;
+  }
+
+  .CustomCandleSection {
+    height: 250px;
+    padding: 0px 15px;
+  }
+
+  .custom-candle-img {
+    border-radius: 6px;
+  }
+
+  .custom-info {
+    bottom: 25px;
+    right: 20px;
+    gap: 6px;
+    font-size: 1.2rem;
+  }
+
+  .custom-info h4 {
+    font-size: 1.1rem;
+    text-align: right;
+  }
+
+  .custom-btn {
+    width: 60%;
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+}
+  */

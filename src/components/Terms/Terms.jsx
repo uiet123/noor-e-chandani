@@ -4,8 +4,9 @@ import "./Terms.css";
 const Terms = () => {
   return (
     <div className="terms-container">
+      <h1 className="terms-title">Terms & Conditions</h1>
       <div className="terms-inner">
-        <h1 className="terms-title">Terms & Conditions</h1>
+        
 
         <p className="terms-intro">
           Welcome to <strong>Noor-e-Chandani</strong>. By accessing or using our website, you agree
@@ -93,7 +94,7 @@ const Terms = () => {
             <a href="mailto:noorechandani.info@gmail.com">
               noorechandani.info@gmail.com
             </a>{" "}
-            or call <strong>+91 7973270451</strong>.
+            or call <strong>+91 9217284904</strong>.
           </p>
         </section>
 

@@ -3,13 +3,15 @@ import "./Checkout.css";
 import { useSelector, useDispatch } from "react-redux";
 import { BASE_URL } from "../../utils/constants";
 import { ClearCart } from "../../store/cartSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Checkout = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const cartItems = useSelector((state) => state.cart.items);
   const allProducts = useSelector((state) => state.product.allProducts);
+  const customItems = useSelector((state) => state.cart.customItems)
   const navigate = useNavigate();
 
   const [address, setAddress] = useState({
@@ -28,6 +30,14 @@ const Checkout = () => {
   const [isProcessing, setisProcessing] = useState(false);
   const [paymentError, setPaymentError] = useState(null);
   const [currentOrderId, setCurrentOrderId] = useState(null);
+
+  console.log(customItems)
+
+  const {
+    finalTotal = 0,
+  } = location.state || {};
+
+
 
   const pollPaymentStatus = async (orderId) => {
     const attempts = 6; 
@@ -100,21 +110,37 @@ const Checkout = () => {
       if(!validateForm()){ 
             throw new Error("Please fill the form correctly")
     }
-      const items = cartProducts.map((p) => ({
+      const normalItems  = cartProducts.map((p) => ({
         productId: p._id,
         name: p.name,
         price: p.price,
-        quantity: cartItems[p._id],
-        image: p.image,
+        quantity: p.quantity,
+        color: p.color || null,
+        image: Array.isArray(p.image) ? p.image[0] : p.image,
       }));
+
+      const customPayloadItems = customItems.map((item) => ({
+    productId: item.productId,  
+    name: item.name,
+    price: item.price,
+    quantity: item.quantity || 1,
+    image: item.image,
+    isCustom: true,
+    customDetails: item.customDetails,
+  }))
+
+
+    const items = [...normalItems, ...customPayloadItems];
 
       const payload = {
         items,
         shippingAddress: address,
         subtotal: totalPrice,
-        shippingCharge: 50,
-        totalAmount: totalPrice + 50,
+        shippingCharge: 120,
+        totalAmount: finalTotal,
       };
+
+        console.log("FINAL PAYLOAD:", payload);
 
       const res = await axios.post(BASE_URL + "/payment/create", payload, {
         withCredentials: true,
@@ -147,15 +173,36 @@ const Checkout = () => {
   };
 
   
-  useEffect(() => {
-    const filtered = allProducts.filter((p) => cartItems[p._id]);
-    setCartProducts(filtered);
-    const total = filtered.reduce(
-      (sum, p) => sum + p.price * cartItems[p._id],
-      0
-    );
-    setTotalPrice(total);
-  }, [cartItems, allProducts]);
+ useEffect(() => {
+  const entries = Object.entries(cartItems);
+
+  const products = entries
+    .map(([key, value]) => {
+      const isVariant = typeof value === "object";
+      const productId = isVariant ? value.productId : key;
+
+      const product = allProducts.find((p) => p._id === productId);
+      if (!product) return null;
+
+      return {
+        ...product,
+        cartKey: key,
+        quantity: isVariant ? value.quantity : value,
+        color: isVariant ? value.color : null,
+      };
+    })
+    .filter(Boolean);
+
+  setCartProducts(products);
+
+  const total = products.reduce(
+    (sum, p) => sum + p.price * p.quantity,
+    0
+  );
+
+  setTotalPrice(total);
+}, [cartItems, allProducts]);
+
 
   const validateForm = () => {
     let temp = {};
@@ -192,8 +239,9 @@ const Checkout = () => {
           <div className="form-group">
             <label>Phone Number</label>
             <input
-              type="number"
+              type="tel"
               value={address.phone}
+              maxLength={10}
               onChange={(e) =>
                 setAddress({ ...address, phone: e.target.value })
               }
@@ -202,7 +250,7 @@ const Checkout = () => {
           </div>
 
           <div className="form-group">
-            <label>Street Address</label>
+            <label>Home Address</label>
             <input
               type="text"
               value={address.street}
@@ -261,12 +309,28 @@ const Checkout = () => {
           <h3>Order Summary</h3>
           <div className="summary-items">
             {cartProducts.map((p) => (
-              <div className="summary-item" key={p._id}>
-                <img src={`${BASE_URL}${p.image}`} alt={p.name} />
+              <div className="summary-item" key={p.cartKey}>
+                <img src={`${BASE_URL}${p.image[0]}`} alt={p.name} />
                 <div>
                   <p>{p.name}</p>
+                  {p.color && (
+        <p className="variant-info">
+          Wax Color: <b>{p.color}</b>
+        </p>
+      )}
                   <span>
-                    ₹{p.price} × {cartItems[p._id]}
+                    ₹{p.price} × {p.quantity}
+                  </span>
+                </div>
+              </div>
+            ))}
+            { customItems.length > 0 && customItems.map((item, idx) => (
+              <div className="summary-item" key={idx}>
+                <img src={`${BASE_URL}${item.image}`} alt={item.name} />
+                <div>
+                  <p>{item.name}</p>
+                  <span>
+                    ₹{item.price} × {item.quantity}
                   </span>
                 </div>
               </div>
@@ -274,15 +338,8 @@ const Checkout = () => {
           </div>
 
           <div className="summary-totals">
-            <p>
-              Subtotal: <b>₹{totalPrice}</b>
-            </p>
-            <p>
-              Shipping: <b>₹50</b>
-            </p>
-            <hr />
             <p className="grand-total">
-              Total: <b>₹{totalPrice + 50}</b>
+             <b>Final Total: ₹{finalTotal}</b>
             </p>
           </div>
 

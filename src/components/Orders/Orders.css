@@ -43,25 +43,30 @@
 
 .order-items {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 35px;
 }
 
 .order-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
   background: #1a1a1a;
-  padding: 15px;
+  padding: 20px;
   border-radius: 10px;
 }
 
 .order-item-image {
   width: 90px;
-  height: 90px;
   border-radius: 8px;
   object-fit: cover;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.order-item-info{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .order-item-info h3 {
@@ -114,26 +119,234 @@
   font-size: 1.2rem;
 }
 
+.reviews-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    margin-right: 30px;
+    align-items: start;
+}
+
+.review-textarea {
+  width: 93%;     
+  overflow-y: hidden; 
+  max-width: 400px; 
+  padding: 10px;
+  border-radius: 8px;
+  resize: none;   
+}
+.char-count {
+  align-self: flex-end;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #eec84d; /* Noor-e-Chandani gold */
+}
+.thanks-text{
+  display: flex;
+  justify-content: end;
+  margin-bottom: 2px;
+  color: #eec84d;
+}
+
+
+.stars{
+  display: flex;
+  flex-direction: row;
+}
+
+.rating{
+  display: flex;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+
+.active-rating{
+  color: #eec84d;
+}
+.review-btnn {
+    display: flex;
+    width: 60%;
+    text-align: center;
+    justify-content: center;
+    padding: 10px 10px;
+    border-radius: 8px;
+    border: none;
+    background: #eec84d;
+    color: #000;
+    margin-top: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s 
+ease-in-out, background-color 2.5s 
+ease-in-out;
+}
+
+.review-btn:hover {
+ background: #ffd966;
+  transform: scale(1.01);
+}
+
+.order-item-details{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
 /* Responsive */
 @media (max-width: 768px) {
   .order-header {
     flex-direction: column;
     gap: 5px;
   }
+
+  .order-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
   .orders-heading {
     font-size: 2rem;
   }
 
-  .order-item {
-    flex-direction: row;
-  }
 
   .order-item-image {
     width: 28%;
-    height: auto;
+    height: 50%;
   }
 
   .orders-page {
     padding: 40px 5vw;
   }
+
+  .order-item{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.order-item-info{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+
+.order-item-details h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.order-item-details p {
+  margin: 2px 0;
+  color: #ddd;
+}
+
+.review-textarea {
+    width: 94%;
+    max-width: 400px;
+    padding: 8px;
+    border-radius: 8px;
+    resize: none;
+}
+
+.reviews-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    margin-right: 30px;
+    align-items: start;
+}
+
+.review-btn {
+    display: flex;
+    width: 65%;
+    text-align: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+    background: #eec84d;
+    color: #000;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s 
+ease-in-out, background-color 2.5s 
+ease-in-out;
+}
+  
+}
+
+@media (max-width: 480px) {
+  .reviews-section{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-item{
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  gap: 5px;
+}
+.order-item-info{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.order-item-details h3 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #fff;
+}
+
+.order-item-details p {
+  margin: 2px 0;
+  color: #ddd;
+}
+
+.review-textarea {
+    width: 95%;
+    padding: 8px;
+    border-radius: 8px;
+    resize: none;
+}
+
+.review-btn {
+    display: flex;
+    width: 65%;
+    text-align: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    background: #eec84d;
+    color: #000;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s 
+ease-in-out, background-color 2.5s 
+ease-in-out;
+}
+
+.thanks-text{
+  margin-top: 15px;
+}
+
+.image-input{
+  width: 89%;
+}
+
+
 }

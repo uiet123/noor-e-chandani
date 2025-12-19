@@ -4,8 +4,9 @@ import "./Privacy.css";
 const Privacy = () => {
   return (
     <div className="privacy-container">
+      <h1 className="privacy-title">Privacy Policy</h1>
       <div className="privacy-inner">
-        <h1 className="privacy-title">Privacy Policy</h1>
+        
 
         <p className="privacy-lead">
           Your privacy matters to <strong>Noor-e-Chandani</strong>. This Privacy Policy explains how we collect, use, and protect your information when you visit our website or make a purchase.
@@ -57,7 +58,7 @@ const Privacy = () => {
           <h2 className="privacy-subtitle">7. Contact Us</h2>
           <p>
             For questions about this policy or your data, email us at{" "}
-            <a href="mailto:noorechandani.info@gmail.com">noorechandani.info@gmail.com</a> or call <strong>+91 7973270451</strong>.
+            <a href="mailto:noorechandani.info@gmail.com">noorechandani.info@gmail.com</a> or call <strong>+91 9217284904</strong>.
           </p>
         </section>
 
