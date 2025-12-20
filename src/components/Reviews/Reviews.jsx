@@ -55,7 +55,7 @@ function Reviews() {
           <div className="marquee-wrapper">
             <motion.div
               className="marquee-row"
-            /*  animate={{ x: ["-100%", "100%"] }} */
+              animate={{ x: ["-100%", "100%"] }}
               transition={{
                 duration: 20,
                 repeat: Infinity,
