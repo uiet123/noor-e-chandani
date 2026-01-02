@@ -106,8 +106,11 @@ const Checkout = () => {
   };
 
   const handleClick = async () => {
+
+    setisProcessing(true);
     try {
       if(!validateForm()){ 
+         setisProcessing(false);
             throw new Error("Please fill the form correctly")
     }
       const normalItems  = cartProducts.map((p) => ({
@@ -168,6 +171,8 @@ const Checkout = () => {
       rzp.open();
       setErrors({})
     } catch (err) {
+      setisProcessing(false);
+      setPaymentError("Please check your filled details and try again.");
       console.log(err);
     }
   };
@@ -354,19 +359,7 @@ const Checkout = () => {
           {paymentError && (
             <div className="payment-result">
               <p>{paymentError}</p>
-              <div className="payment-actions">
-                <button
-                  onClick={() => {
-                    if (currentOrderId) pollPaymentStatus(currentOrderId);
-                    else handleClick();
-                  }}
-                >
-                  {currentOrderId ? "Refresh Status" : "Retry Payment"}
-                </button>
-                <button onClick={() => (window.location.href = "/orders")}>
-                  View Orders
-                </button>
-              </div>
+              
             </div>
           )}
         </div>

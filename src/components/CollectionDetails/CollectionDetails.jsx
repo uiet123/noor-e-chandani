@@ -8,6 +8,7 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import "./CollectionDetails.css";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { AddToCart, RemoveFromCart } from "../../store/cartSlice";
+import Loading from "../Loading/Loading";
 
 const CollectionDetail = () => {
   const { slug } = useParams();
@@ -80,7 +81,7 @@ const CollectionDetail = () => {
     getRatings();
   }, []);
 
-  if (loading) return <h2 style={{ color: "white" }}>Loading...</h2>;
+  if (loading) return <Loading />
   if (!collection)
     return <h2 style={{ color: "white" }}>Collection not found</h2>;
 

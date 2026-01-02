@@ -1,13 +1,22 @@
 .orders-page {
   background-color: #111;
   color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 10px 20px;
+ display: block;
+  min-height: 40vh;
+  padding: 20px 40px;
   font-family: "Inter", sans-serif;
 }
+
+.no-orders-wrapper {
+  margin-top: 60px;        /* 👈 heading ke neeche */
+  text-align: center;
+}
+
+.no-orders-text {
+  color: #aaa;
+  font-size: 18px;
+}
+
 
 .orders-heading {
   text-align: center;

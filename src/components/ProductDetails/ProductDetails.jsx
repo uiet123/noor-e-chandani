@@ -9,6 +9,7 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import "./ProductDetails.css";
 import { color } from "framer-motion";
+import Loading from "../Loading/Loading";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -134,7 +135,7 @@ const ProductDetail = () => {
     };
   }, [id, dispatch]);
 
-  if (loading) return <div style={{ color: "white" }}>Loading...</div>;
+  if (loading) return <Loading />
   if (!product) return <div style={{ color: "white" }}>Product not found</div>;
   console.log(product);
 

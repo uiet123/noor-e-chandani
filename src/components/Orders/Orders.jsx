@@ -19,6 +19,11 @@ const Orders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
   const user = useSelector((state) => state.user.user);
+
+  const capturedOrders = orders.filter(
+  (order) => order.paymentStatus === "captured"
+);
+
   
 
   useEffect(() => {
@@ -34,6 +39,8 @@ const Orders = () => {
     }
     fetchOrders();
   }, [dispatch]);
+
+  console.log("Orders from Redux Store:", orders);
 
   useEffect(() => {
     if (!Array.isArray(orders) || orders.length === 0) return;
@@ -85,7 +92,7 @@ const Orders = () => {
 
   if (!Array.isArray(orders) || orders.length === 0) {
     return (
-      <div className="empty-orders">You haven’t placed any orders yet.</div>
+      <div className="empty-orders">You haven’t placed any order yet.</div>
     );
   }
 
@@ -161,7 +168,15 @@ const Orders = () => {
     <div className="orders-page">
       <h2 className="orders-heading">Your Orders</h2>
 
-      {[...orders].reverse().map((order) => (
+       {capturedOrders.length === 0 ? (
+    <div className="no-orders-wrapper">
+    <p className="no-orders-text">
+      You haven’t placed any order yet.
+    </p>
+  </div>
+  ) : (
+    [...capturedOrders].reverse().map((order) => (
+         
         <div key={order._id} className="order-box">
           <div className="order-header">
             <p>
@@ -354,8 +369,12 @@ const Orders = () => {
               Estimated delivery between <strong>5 to 7 days</strong>
             </p>
           </div>
-        </div>
-      ))}
+        </div> 
+      ))
+  )}
+
+       
+      
     </div>
   );
 };
