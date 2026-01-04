@@ -32,6 +32,44 @@
 .color-circle.White { background: white; border: 1px solid #ccc; }
 
 
+/* =========================
+   USER DEFINED FRAGRANCE
+========================= */
+
+.fragrance-selector {
+  margin-top: 20px;
+}
+
+.fragrance-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.fragrance-btn {
+  padding: 5px 8px;
+  border-radius: 20px;
+  border: 1px solid #f5c542;
+  background: transparent;
+  color: #f5c542;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.fragrance-btn:hover {
+  background: #f5c542;
+  color: #000;
+}
+
+.fragrance-btn.active {
+  background: #f5c542;
+  color: #000;
+  font-weight: 600;
+  transform: scale(1.09);
+}
 
 
 
@@ -352,7 +390,7 @@ hr{
     flex-direction: row;
     align-items: center;
     text-align: center;
-   
+   margin-top: 10px;
     gap: 20px;
 }
 .cart-add-sub-productdetail svg {

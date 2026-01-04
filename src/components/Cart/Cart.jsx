@@ -11,34 +11,35 @@ import { AddCustomItem, RemoveCustomItem } from "../../store/cartSlice";
 import "./Cart.css";
 
 const Cart = () => {
-  const cartItems = useSelector((state) => state.cart.items); 
+  const cartItems = useSelector((state) => state.cart.items);
   const customItems = useSelector((state) => state.cart.customItems);
   const allProduct = useSelector((state) => state.product.allProducts);
   const cartEntries = Object.entries(cartItems);
 
-const cartProducts = cartEntries
-  .map(([key, value]) => {
-    const isVariant = typeof value === "object";
-    const productId = isVariant ? value.productId : key;
+  const cartProducts = cartEntries
+    .map(([key, value]) => {
+      const isVariant = typeof value === "object";
+      const productId = isVariant ? value.productId : key;
 
-    const product = allProduct.find((p) => p._id === productId);
-    if (!product) return null;
+      const product = allProduct.find((p) => p._id === productId);
+      if (!product) return null;
 
-    return {
-      ...product,
-      cartKey: key,
-      quantity: isVariant ? value.quantity : value,
-      color: isVariant ? value.color : null,
-    };
-  })
-  .filter(Boolean);
+      return {
+        ...product,
+        cartKey: key,
+        quantity: isVariant ? value.quantity : value,
+        color: isVariant ? value.color : null,
+        fragrance: isVariant ? value.fragrance : null,
+      };
+    })
+    .filter(Boolean);
 
-  console.log(customItems)
+  console.log(customItems);
 
   const normalTotal = cartProducts.reduce(
-  (sum, p) => sum + p.price * p.quantity,
-  0
-);
+    (sum, p) => sum + p.price * p.quantity,
+    0
+  );
 
   const customTotal = customItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -93,9 +94,6 @@ const cartProducts = cartEntries
     getAllProducts();
   }, []);
 
-
-
-
   useEffect(() => {
     setFinalTotal(totalPrice + shippingCharge - discount);
   }, [totalPrice, discount]);
@@ -133,13 +131,20 @@ const cartProducts = cartEntries
                 <span className="thumb-number">{product.quantity}</span>
                 <button
                   className="icon-btn"
-                  onClick={() => dispatch(AddToCart( product.color
-                  ? {
-                      variantKey: product.cartKey,
-                      productId: product._id,
-                      color: product.color,
-                    }
-                  : product._id))}
+                  onClick={() =>
+                    dispatch(
+                      AddToCart(
+                         product.cartKey.includes("-")
+                          ? {
+                              variantKey: product.cartKey,
+                              productId: product._id,
+                              color: product.color,
+                              fragrance: product.fragrance,
+                            }
+                          : product._id
+                      )
+                    )
+                  }
                 >
                   <FaPlus />
                 </button>
@@ -147,9 +152,17 @@ const cartProducts = cartEntries
             </div>
             <div className="cart-info">
               <h3>{product.name}</h3>
-              {product.color && (
-  <p className="variant-info">Color: {product.color}</p>
-)}
+              {product.color &&
+                product.color !== "Default" &&
+                product.color !== "Fixed" && (
+                  <p className="variant-info">Color: {product.color}</p>
+                )}
+              {product.fragrance &&
+                product.fragrance !== "Default" &&
+                product.fragrance !== "Fixed" && (
+                  <p className="variant-info">Fragrance: {product.fragrance}</p>
+                )}
+
               <p>₹{product.price}</p>
               <p className="subtotal">
                 Subtotal: ₹{product.price * product.quantity}
@@ -164,13 +177,20 @@ const cartProducts = cartEntries
                 <span className="thumb-number">{product.quantity}</span>
                 <FaPlus
                   className="icon-btn"
-                  onClick={() => dispatch(AddToCart( product.color
-                  ? {
-                      variantKey: product.cartKey,
-                      productId: product._id,
-                      color: product.color,
-                    }
-                  : product._id))}
+                  onClick={() =>
+                    dispatch(
+                      AddToCart(
+                         product.cartKey.includes("-")
+                          ? {
+                              variantKey: product.cartKey,
+                              productId: product._id,
+                              color: product.color,
+                              fragrance: product.fragrance,
+                            }
+                          : product._id
+                      )
+                    )
+                  }
                 ></FaPlus>
               </div>
             </div>
@@ -212,13 +232,13 @@ const cartProducts = cartEntries
                 <h3>{item.name}</h3>
                 <p>{item.customDetails.glassType}</p>
                 <p>{item.customDetails.waxType}</p>
-                <p>{item.customDetails.layers}</p>   
+                <p>{item.customDetails.layers}</p>
                 {item.customDetails.layer1Color && (
                   <p>Top layer colour: {item.customDetails.layer1Color}</p>
                 )}
                 {item.customDetails.layer2Color && (
                   <p>Bottom layer colour: {item.customDetails.layer2Color}</p>
-                )}        
+                )}
                 {item.customDetails.fragrance && (
                   <p>Fragrance: {item.customDetails.fragrance}</p>
                 )}

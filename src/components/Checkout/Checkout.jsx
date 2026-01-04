@@ -11,7 +11,7 @@ const Checkout = () => {
   const location = useLocation();
   const cartItems = useSelector((state) => state.cart.items);
   const allProducts = useSelector((state) => state.product.allProducts);
-  const customItems = useSelector((state) => state.cart.customItems)
+  const customItems = useSelector((state) => state.cart.customItems);
   const navigate = useNavigate();
 
   const [address, setAddress] = useState({
@@ -31,17 +31,13 @@ const Checkout = () => {
   const [paymentError, setPaymentError] = useState(null);
   const [currentOrderId, setCurrentOrderId] = useState(null);
 
-  console.log(customItems)
+  console.log(customItems);
 
-  const {
-    finalTotal = 0,
-  } = location.state || {};
-
-
+  const { finalTotal = 0 } = location.state || {};
 
   const pollPaymentStatus = async (orderId) => {
-    const attempts = 6; 
-    const delayMs = 2000; 
+    const attempts = 6;
+    const delayMs = 2000;
     for (let i = 0; i < attempts; i++) {
       try {
         const res = await axios.get(`${BASE_URL}/payment/status/${orderId}`, {
@@ -90,9 +86,9 @@ const Checkout = () => {
       setCurrentOrderId(orderId);
 
       const result = await pollPaymentStatus(orderId);
-      if (result.ok) { 
+      if (result.ok) {
         console.log("Payment verified successfully:", result.status);
-      } else { 
+      } else {
         console.log("Payment verification result:", result.status);
       }
     } catch (err) {
@@ -101,39 +97,38 @@ const Checkout = () => {
         "❌ Could not verify payment. Please try again or check your Orders."
       );
     } finally {
-      setisProcessing(false); 
+      setisProcessing(false);
     }
   };
 
   const handleClick = async () => {
-
     setisProcessing(true);
     try {
-      if(!validateForm()){ 
-         setisProcessing(false);
-            throw new Error("Please fill the form correctly")
-    }
-      const normalItems  = cartProducts.map((p) => ({
+      if (!validateForm()) {
+        setisProcessing(false);
+        throw new Error("Please fill the form correctly");
+      }
+      const normalItems = cartProducts.map((p) => ({
         productId: p._id,
         name: p.name,
         price: p.price,
         quantity: p.quantity,
         color: p.color || null,
+        fragrance: p.fragrance || null,
         image: Array.isArray(p.image) ? p.image[0] : p.image,
       }));
 
       const customPayloadItems = customItems.map((item) => ({
-    productId: item.productId,  
-    name: item.name,
-    price: item.price,
-    quantity: item.quantity || 1,
-    image: item.image,
-    isCustom: true,
-    customDetails: item.customDetails,
-  }))
+        productId: item.productId,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity || 1,
+        image: item.image,
+        isCustom: true,
+        customDetails: item.customDetails,
+      }));
 
-
-    const items = [...normalItems, ...customPayloadItems];
+      const items = [...normalItems, ...customPayloadItems];
 
       const payload = {
         items,
@@ -143,7 +138,7 @@ const Checkout = () => {
         totalAmount: finalTotal,
       };
 
-        console.log("FINAL PAYLOAD:", payload);
+      console.log("FINAL PAYLOAD:", payload);
 
       const res = await axios.post(BASE_URL + "/payment/create", payload, {
         withCredentials: true,
@@ -169,7 +164,7 @@ const Checkout = () => {
 
       const rzp = new window.Razorpay(options);
       rzp.open();
-      setErrors({})
+      setErrors({});
     } catch (err) {
       setisProcessing(false);
       setPaymentError("Please check your filled details and try again.");
@@ -177,37 +172,33 @@ const Checkout = () => {
     }
   };
 
-  
- useEffect(() => {
-  const entries = Object.entries(cartItems);
+  useEffect(() => {
+    const entries = Object.entries(cartItems);
 
-  const products = entries
-    .map(([key, value]) => {
-      const isVariant = typeof value === "object";
-      const productId = isVariant ? value.productId : key;
+    const products = entries
+      .map(([key, value]) => {
+        const isVariant = typeof value === "object";
+        const productId = isVariant ? value.productId : key;
 
-      const product = allProducts.find((p) => p._id === productId);
-      if (!product) return null;
+        const product = allProducts.find((p) => p._id === productId);
+        if (!product) return null;
 
-      return {
-        ...product,
-        cartKey: key,
-        quantity: isVariant ? value.quantity : value,
-        color: isVariant ? value.color : null,
-      };
-    })
-    .filter(Boolean);
+        return {
+          ...product,
+          cartKey: key,
+          quantity: isVariant ? value.quantity : value,
+          color: isVariant ? value.color : null,
+          fragrance: isVariant ? value.fragrance : null,
+        };
+      })
+      .filter(Boolean);
 
-  setCartProducts(products);
+    setCartProducts(products);
 
-  const total = products.reduce(
-    (sum, p) => sum + p.price * p.quantity,
-    0
-  );
+    const total = products.reduce((sum, p) => sum + p.price * p.quantity, 0);
 
-  setTotalPrice(total);
-}, [cartItems, allProducts]);
-
+    setTotalPrice(total);
+  }, [cartItems, allProducts]);
 
   const validateForm = () => {
     let temp = {};
@@ -318,33 +309,43 @@ const Checkout = () => {
                 <img src={`${BASE_URL}${p.image[0]}`} alt={p.name} />
                 <div>
                   <p>{p.name}</p>
-                  {p.color && (
-        <p className="variant-info">
-          Wax Color: <b>{p.color}</b>
-        </p>
-      )}
+                  {p.color && p.color !== "Default" && p.color !== "Fixed" && (
+                    <p className="variant-info">
+                      Wax Color: <b>{p.color}</b>
+                    </p>
+                  )}
+
+                  {p.fragrance &&
+                    p.fragrance !== "Default" &&
+                    p.fragrance !== "Fixed" && (
+                      <p className="variant-info">
+                        Fragrance: <b>{p.fragrance}</b>
+                      </p>
+                    )}
+
                   <span>
                     ₹{p.price} × {p.quantity}
                   </span>
                 </div>
               </div>
             ))}
-            { customItems.length > 0 && customItems.map((item, idx) => (
-              <div className="summary-item" key={idx}>
-                <img src={`${BASE_URL}${item.image}`} alt={item.name} />
-                <div>
-                  <p>{item.name}</p>
-                  <span>
-                    ₹{item.price} × {item.quantity}
-                  </span>
+            {customItems.length > 0 &&
+              customItems.map((item, idx) => (
+                <div className="summary-item" key={idx}>
+                  <img src={`${BASE_URL}${item.image}`} alt={item.name} />
+                  <div>
+                    <p>{item.name}</p>
+                    <span>
+                      ₹{item.price} × {item.quantity}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
 
           <div className="summary-totals">
             <p className="grand-total">
-             <b>Final Total: ₹{finalTotal}</b>
+              <b>Final Total: ₹{finalTotal}</b>
             </p>
           </div>
 
@@ -359,7 +360,6 @@ const Checkout = () => {
           {paymentError && (
             <div className="payment-result">
               <p>{paymentError}</p>
-              
             </div>
           )}
         </div>

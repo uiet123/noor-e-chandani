@@ -21,7 +21,7 @@ const Orders = () => {
   const user = useSelector((state) => state.user.user);
 
   const capturedOrders = orders.filter(
-  (order) => order.paymentStatus === "captured"
+  (order) => order.paymentStatus === "captured" 
 );
 
   
@@ -207,7 +207,8 @@ const Orders = () => {
 
                     <div className="order-item-details">
                       <h3>{item.name}</h3>
-                      {item.color && <h4>Colour : {item.color}</h4>}
+                      {item.color && item.color !== "Default" && item.color !== "Fixed" && <h5>Colour : {item.color}</h5>}
+                      {item.fragrance && item.fragrance !== "Default" && item.fragrance !== "Fixed"  && <h5>Fragrance : {item.fragrance}</h5>}
                       {item.customDetails.isCustom && (
                         <>
                           <p>Glass Type: {item.customDetails.glassType}</p>
@@ -241,9 +242,9 @@ const Orders = () => {
                           )}
                         </>
                       )}
-                      <p>
+                      <h5>
                         ₹{item.price} × {item.quantity}
-                      </p>
+                      </h5>
                       <p>Subtotal: ₹{item.price * item.quantity}</p>
                     </div>
                   </div>

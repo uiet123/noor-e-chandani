@@ -22,15 +22,16 @@ const cartSlice = createSlice({
     return;
   }
 
-  const { variantKey, productId, color } = payload;
+  const { variantKey, productId, color, fragrance } = payload;
 
   if (state.items[variantKey]) {
     state.items[variantKey].quantity += 1;
   } else {
     state.items[variantKey] = {
       productId,
-      color,
       quantity: 1,
+      color: color || "Default",
+      fragrance: fragrance || "Default",
     };
   }
 },

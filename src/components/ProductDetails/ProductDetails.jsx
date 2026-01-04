@@ -23,13 +23,20 @@ const ProductDetail = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const reviewsState = useSelector((state) => state.review.review);
   const dispatch = useDispatch();
-  const colors = ["Red", "Green", "Yellow", "Blue", "Orange", "Pink", "White"];
   const [selectedColor, setSelectedColor] = useState("");
+  const [selectedFragrance, setSelectedFragrance] = useState("");
 
-  const isWaxArt = product?.collection?.slug === "wax_art";
+  const isUserDefined = product?.customizationType === "USER_DEFINED";
+  const isAdminDefined = product?.customizationType === "ADMIN_DEFINED";
+
+  const finalColor = isUserDefined && selectedColor ? selectedColor : "Default";
+
+  const finalFragrance =
+    isUserDefined && selectedFragrance ? selectedFragrance : "Default";
+
   const variantKey = product
-    ? isWaxArt
-      ? `${product._id}-${selectedColor}`
+    ? isUserDefined
+      ? `${product._id}-${finalColor}-${finalFragrance}`
       : product._id
     : null;
 
@@ -135,7 +142,9 @@ const ProductDetail = () => {
     };
   }, [id, dispatch]);
 
-  if (loading) return <Loading />
+  console.log(product);
+
+  if (loading) return <Loading />;
   if (!product) return <div style={{ color: "white" }}>Product not found</div>;
   console.log(product);
 
@@ -190,18 +199,54 @@ const ProductDetail = () => {
           ) : (
             <p className="price-page-productdetail">₹{product.price}</p>
           )}
-          {isWaxArt && (
+          {isUserDefined && product.availableColors?.length > 0 && (
             <div className="color-selector">
-              <p>Choose Wax Color: <span className="candle-desc-details">{selectedColor}</span></p>
+              <p>
+                Choose Wax Color:
+                <span className="candle-desc-details"> {selectedColor ||"None"}</span>
+              </p>
+
               <div className="color-options">
-                {colors.map((color) => (
+                {product.availableColors.map((color) => (
                   <div
                     key={color}
                     className={`color-circle ${color} ${
-                      selectedColor === color ? "active" : ""
+                      selectedColor === color  ? "active" : ""
                     }`}
-                    onClick={() => setSelectedColor(color)}
+                    onClick={() =>
+                      setSelectedColor((prev) => (prev === color ? "" : color))
+                    }
                   />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {isUserDefined && product.availableFragrances?.length > 0 && (
+            <div className="fragrance-selector">
+              <p>
+                Choose Fragrance:
+                <span className="candle-desc-details">
+                  {" "}
+                  {selectedFragrance || "None"}
+                </span>
+              </p>
+
+              <div className="fragrance-options">
+                {product.availableFragrances.map((frag) => (
+                  <button
+                    key={frag}
+                    className={`fragrance-btn ${
+                      selectedFragrance === frag ? "active" : ""
+                    }`}
+                    onClick={() =>
+                      setSelectedFragrance((prev) =>
+                        prev === frag ? "" : frag
+                      )
+                    }
+                  >
+                    {frag}
+                  </button>
                 ))}
               </div>
             </div>
@@ -227,7 +272,8 @@ const ProductDetail = () => {
                       AddToCart({
                         variantKey,
                         productId: product._id,
-                        color: isWaxArt ? selectedColor : null,
+                        color: isUserDefined ? finalColor : "Fixed",
+                        fragrance: isUserDefined ? finalFragrance : "Fixed",
                       })
                     )
                   }
@@ -242,7 +288,8 @@ const ProductDetail = () => {
                       AddToCart({
                         variantKey,
                         productId: product._id,
-                        color: isWaxArt ? selectedColor : null,
+                        color: isUserDefined ? finalColor : "Fixed",
+                        fragrance: isUserDefined ? finalFragrance : "Fixed",
                       })
                     )
                   }
@@ -256,7 +303,8 @@ const ProductDetail = () => {
                       AddToCart({
                         variantKey,
                         productId: product._id,
-                        color: isWaxArt ? selectedColor : null,
+                        color: isUserDefined ? finalColor : "Fixed",
+                        fragrance: isUserDefined ? finalFragrance : "Fixed",
                       })
                     );
                     navigate("/cart");
@@ -281,24 +329,33 @@ const ProductDetail = () => {
             </div>
           )}
           <div className="desc candle-desc">
+            {isAdminDefined && product.fixedColor && (
+              <p>
+                Wax Color:{" "}
+                <span className="candle-desc-details">
+                  {product.fixedColor}
+                </span>
+              </p>
+            )}
+
+            {isAdminDefined && (
+              <p>
+                Fragrance:{" "}
+                <span className="candle-desc-details">
+                  {product.fixedFragrance &&
+                  product.fixedFragrance.trim() !== ""
+                    ? product.fixedFragrance
+                    : "Non-Scented"}
+                </span>
+              </p>
+            )}
             <p>
               Wax Used :{" "}
               <span className="candle-desc-details">
                 {product.materialUsed}
               </span>
             </p>
-            <p>
-              Fragrance :{" "}
-              <span className="candle-desc-details">
-                {product.fragranceType}
-              </span>
-            </p>
-            {product.scentName && (
-              <p>
-                Scent :{" "}
-                <span className="candle-desc-details">{product.scentName}</span>
-              </p>
-            )}
+
             <p>
               Burn Time :{" "}
               <span className="candle-desc-details">{product.burnTime}</span>
@@ -308,8 +365,6 @@ const ProductDetail = () => {
               <span className="candle-desc-details">{product.weight}</span>
             </p>
             <div>
-              {" "}
-              Description:{" "}
               <p className="desc desc-mobile">{product.description}</p>
             </div>
           </div>
@@ -334,7 +389,8 @@ const ProductDetail = () => {
                       AddToCart({
                         variantKey,
                         productId: product._id,
-                        color: selectedColor,
+                        color: isUserDefined ? finalColor : "Fixed",
+                        fragrance: isUserDefined ? finalFragrance : "Fixed",
                       })
                     )
                   }
@@ -349,7 +405,8 @@ const ProductDetail = () => {
                       AddToCart({
                         variantKey,
                         productId: product._id,
-                        color: isWaxArt ? selectedColor : null,
+                        color: isUserDefined ? finalColor : "Fixed",
+                        fragrance: isUserDefined ? finalFragrance : "Fixed",
                       })
                     )
                   }
@@ -363,7 +420,8 @@ const ProductDetail = () => {
                       AddToCart({
                         variantKey,
                         productId: product._id,
-                        color: isWaxArt ? selectedColor : null,
+                        color: isUserDefined ? finalColor : "Fixed",
+                        fragrance: isUserDefined ? finalFragrance : "Fixed",
                       })
                     );
                     navigate("/cart");
