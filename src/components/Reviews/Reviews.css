@@ -4,11 +4,12 @@
   background-color: #000;
   text-align: center;
   display: flex;
-  height: 45vh;
+  height: 60vh;
   flex-direction: column;
 }
 .review-section h2{
   margin-top: 10px;
+  margin-bottom: 20px;
   font-size: 3rem;
   color: #eec84d;
   font-family: "Cormorant Garamond", serif;
@@ -17,17 +18,20 @@
 
 
 .marquee-wrapper {
-  overflow: hidden;
-  width: 100%;
-  margin-top: 15px;
-  padding: 20px 0;
-  background: #000;
+overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .marquee-row {
   display: flex;
   gap: 25px;
   white-space: nowrap;
+}
+
+.marquee-row.reverse {
+  flex-direction: row;
 }
 .review-box-info{
   display: flex;
@@ -92,7 +96,7 @@
 }
 @media (max-width: 480px) {
   .review-section{
-    height: 38vh;
+    height: 55vh;
   }
   .review-box {
     padding: 12px 16px;

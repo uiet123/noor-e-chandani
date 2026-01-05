@@ -13,6 +13,11 @@ function Reviews() {
 
   console.log("All Reviews from Redux Store:", allreviews);
 
+  const mid = Math.ceil(allreviews.length / 2);
+const topReviews = allreviews.slice(0, mid);
+const bottomReviews = allreviews.slice(mid);
+
+
   useEffect(() => {
     async function getReviews() {
       try {
@@ -50,41 +55,71 @@ function Reviews() {
   return (
     <>
       {allreviews.length > 0 && (
-        <div className="review-section">
-          <h2>What our customers says</h2>
-          <div className="marquee-wrapper">
-            <motion.div
-              className="marquee-row"
-              animate={{ x: ["-100%", "100%"] }}
-              transition={{
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            >
-              {allreviews.map((review, index) => (
-               <div className="review-box" key={review._id}>
-                  {review.images?.[0] && (
-                    <img src={`${BASE_URL}${review.images[0]}`} alt="review" />
-                  )}
+  <div className="review-section">
+    <h2>What our customers says</h2>
 
-                  <div className="review-box-info">
-                    <div className="review-header">
-                      <h5>{review.userId.firstName || "Anonymous"}</h5>
-                      <div className="review-stars">
-                        {renderStars(review.rating)}
-                      </div>
-                    </div>
+    <div className="marquee-wrapper">
+      <motion.div
+        className="marquee-row"
+        animate={{ x: ["-100%", "100%"] }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        {topReviews.map((review) => (
+          <div className="review-box" key={review._id}>
+            {review.images?.[0] && (
+              <img src={`${BASE_URL}${review.images[0]}`} alt="review" />
+            )}
 
-                    <p>{review.comment}</p>
-                  </div>
+            <div className="review-box-info">
+              <div className="review-header">
+                <h5>{review.userId?.firstName || "Anonymous"}</h5>
+                <div className="review-stars">
+                  {renderStars(review.rating)}
                 </div>
-               
-              ))}
-            </motion.div>
+              </div>
+              <p>{review.comment}</p>
+            </div>
           </div>
-        </div>
-      )}
+        ))}
+      </motion.div> 
+
+      {/* 🔽 BOTTOM ROW (Right ➝ Left) */}
+      <motion.div
+        className="marquee-row reverse"
+        animate={{ x: ["100%", "-100%"] }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        {bottomReviews.map((review) => (
+          <div className="review-box" key={review._id}>
+            {review.images?.[0] && (
+              <img src={`${BASE_URL}${review.images[0]}`} alt="review" />
+            )}
+
+            <div className="review-box-info">
+              <div className="review-header">
+                <h5>{review.userId?.firstName || "Anonymous"}</h5>
+                <div className="review-stars">
+                  {renderStars(review.rating)}
+                </div>
+              </div>
+              <p>{review.comment}</p>
+            </div>
+          </div>
+        ))}
+      </motion.div>
+
+    </div>
+  </div>
+)}
+
     </>
   );
 }
