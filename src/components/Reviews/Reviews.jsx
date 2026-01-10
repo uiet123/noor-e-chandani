@@ -87,7 +87,7 @@ const bottomReviews = allreviews.slice(mid);
         ))}
       </motion.div> 
 
-      {/* 🔽 BOTTOM ROW (Right ➝ Left) */}
+     
       <motion.div
         className="marquee-row reverse"
         animate={{ x: ["100%", "-100%"] }}

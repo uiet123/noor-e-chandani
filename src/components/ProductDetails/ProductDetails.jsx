@@ -84,6 +84,7 @@ const ProductDetail = () => {
     setDirection(i > current ? "right" : "left");
     setCurrent(i);
   };
+  
 
   useEffect(() => {
     if (!product?.image) return;
@@ -142,11 +143,22 @@ const ProductDetail = () => {
     };
   }, [id, dispatch]);
 
+    const validColors = useMemo(() => {
+  return (product?.availableColors || []).filter(
+    (c) => typeof c === "string" && c.trim() !== ""
+  );
+}, [product]);
+
   console.log(product);
 
   if (loading) return <Loading />;
   if (!product) return <div style={{ color: "white" }}>Product not found</div>;
   console.log(product);
+  console.log("availableColors:", product.availableColors);
+
+
+
+
 
   return (
     <div className="product-detail-page">
@@ -199,7 +211,7 @@ const ProductDetail = () => {
           ) : (
             <p className="price-page-productdetail">₹{product.price}</p>
           )}
-          {isUserDefined && product.availableColors?.length > 0 && (
+          {isUserDefined && validColors?.length > 0  && (
             <div className="color-selector">
               <p>
                 Choose Wax Color:
@@ -207,7 +219,7 @@ const ProductDetail = () => {
               </p>
 
               <div className="color-options">
-                {product.availableColors.map((color) => (
+                {validColors.map((color) => (
                   <div
                     key={color}
                     className={`color-circle ${color} ${
