@@ -22,6 +22,7 @@ const ProductDetail = () => {
   const [direction, setDirection] = useState("right");
   const cartItems = useSelector((state) => state.cart.items);
   const reviewsState = useSelector((state) => state.review.review);
+  const allProducts = useSelector((state) => state.product.allProducts);
   const dispatch = useDispatch();
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedFragrance, setSelectedFragrance] = useState("");
@@ -102,6 +103,18 @@ const ProductDetail = () => {
     async function getProduct() {
       try {
         setLoading(true);
+        
+        if (allProducts && allProducts.length > 0) {
+          const foundProduct = allProducts.find(p => p._id === id);
+          if (foundProduct) {
+            if (mounted) {
+              setProduct(foundProduct);
+              setLoading(false);
+            }
+            return;
+          }
+        }
+
         const res = await axios.get(`${BASE_URL}/products/${id}`, {
           withCredentials: true,
         });
@@ -170,7 +183,7 @@ const ProductDetail = () => {
 
           <div className="pd-image-box">
             <img
-              src={`${BASE_URL}${product.image[current]}`}
+              src={product.image[current].startsWith('/') ? product.image[current] : `${BASE_URL}${product.image[current]}`}
               alt=""
               className="pd-main-img"
             />

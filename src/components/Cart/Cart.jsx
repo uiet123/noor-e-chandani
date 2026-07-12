@@ -120,7 +120,7 @@ const Cart = () => {
         {cartProducts.map((product) => (
           <div key={product.cartKey} className="cart-item">
             <div className="thumb">
-              <img src={`${BASE_URL}${product.image[0]}`} alt={product.name} />
+              <img src={product.image[0].startsWith('/') ? product.image[0] : `${BASE_URL}${product.image[0]}`} alt={product.name} />
               <div className="counter-bar counter-in">
                 <button
                   className="icon-btn"
@@ -200,7 +200,7 @@ const Cart = () => {
           {customItems.map((item, index) => (
             <div key={index} className="cart-item">
               <div className="thumb">
-                <img src={`${BASE_URL}${item.image}`} alt="custom-candle" />
+                <img src={item.image && item.image.startsWith('/') ? item.image : `${BASE_URL}${item.image}`} alt="custom-candle" />
 
                 <div className="counter-bar counter-in">
                   <button

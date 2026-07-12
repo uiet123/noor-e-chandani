@@ -38,13 +38,8 @@ const AllProducts = () => {
   };
 
   useEffect(() => {
-    async function getAllProducts() {
-      const res = await axios.get(`${BASE_URL}/products`, {
-        withCredentials: true,
-      });
-      dispatch(setAllProducts(res?.data?.data));
-    }
-    getAllProducts();
+    // If we need data here when refreshing directly on /allproducts, it should be fetched from a static file.
+    // For now, it relies on the redux state populated by Collections.jsx
   }, []);
 
   useEffect(() => {
@@ -76,7 +71,7 @@ const AllProducts = () => {
             className="product-card-link"
           >
             <div key={item._id} className="allproducts-page-map">
-              <img src={`${BASE_URL}${item.image[0]}`} alt={item.name} />
+              <img src={item.image[0].startsWith('/') ? item.image[0] : `${BASE_URL}${item.image[0]}`} alt={item.name} />
 
               <div className="add-to-cart-page">
                 {cartItems[item._id] ? (

@@ -306,7 +306,7 @@ const Checkout = () => {
           <div className="summary-items">
             {cartProducts.map((p) => (
               <div className="summary-item" key={p.cartKey}>
-                <img src={`${BASE_URL}${p.image[0]}`} alt={p.name} />
+                <img src={p.image[0].startsWith('/') ? p.image[0] : `${BASE_URL}${p.image[0]}`} alt={p.name} />
                 <div>
                   <p>{p.name}</p>
                   {p.color && p.color !== "Default" && p.color !== "Fixed" && (
@@ -332,7 +332,7 @@ const Checkout = () => {
             {customItems.length > 0 &&
               customItems.map((item, idx) => (
                 <div className="summary-item" key={idx}>
-                  <img src={`${BASE_URL}${item.image}`} alt={item.name} />
+                  <img src={item.image && item.image.startsWith('/') ? item.image : `${BASE_URL}${item.image}`} alt={item.name} />
                   <div>
                     <p>{item.name}</p>
                     <span>

@@ -33,18 +33,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    async function getUser() {
-      try {
-        const res = await axios.get(`${BASE_URL}/auth/me`, {
-          withCredentials: true,
-        });
-
-        dispatch(addUser(res?.data?.data));
-      } catch (err) {
-        console.error(err.message);
-      }
-    }
-    getUser();
+    // Authentication bypassed: using dummy user in Redux initialState
     window.scrollTo(0, 0);
   }, []);
   
